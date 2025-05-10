@@ -1,4 +1,4 @@
-.modal {
+/* .modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,6 +8,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+}
+.modal_opened {
+  visibility: visible;
 }
 
 .modal__title {
@@ -42,4 +46,132 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+} */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0000004d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  font-family: 'Cabinet Grotesk';
+}
+
+.modal_opened {
+  visibility: visible;
+}
+
+.modal__content {
+  background-color: #fff;
+  position: relative;
+  padding: 28px;
+  max-width: 496px;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.modal__title {
+  margin: 0 0 24px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+.modal__input,
+.modal__radio-option,
+.modal__submit {
+  font-weight: 400; /* Regular for inputs/buttons */
+}
+
+.modal__radio-buttons legend {
+  font-family: 'Cabinet Grotesk';
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+  margin-bottom: 12px;
+  display: block;
+}
+.modal .modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+}
+
+.modal__input {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid #000;
+  margin-bottom: 24px;
+  font-size: 16px;
+}
+
+.modal__input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__radio-buttons {
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.modal__radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* .modal__submit {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  align-self: flex-start;
+} */
+
+.modal__submit {
+  width: 124px;
+  height: 36px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Cabinet Grotesk';
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  cursor: pointer;
+  margin-top: 12px; /* This creates your 12px gap */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.modal__submit:hover {
+  opacity: 0.6;
 }
