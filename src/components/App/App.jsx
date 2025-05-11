@@ -15,6 +15,8 @@ function App() {
     type: '',
     temp: { F: 999 },
     city: '',
+    isDay: true,
+    condition: 'clear',
   });
   const [activeModal, setActiveModal] = useState('');
   const [selectedCard, setSelectedCard] = useState({});
@@ -35,7 +37,11 @@ function App() {
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
+        console.log('Raw Weather Data:', data); // Add this line
+
         const filteredData = filterWeatherData(data);
+        console.log('Filtered Weather Data:', filteredData);
+
         setWeatherData(filteredData);
       })
       .catch((error) => {
