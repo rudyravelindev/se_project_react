@@ -1,9 +1,9 @@
 import '../ItemModal/ItemModal.css';
 import CloseIconBtn from '../../../assets/close-btn.svg';
 
-function ItemModal({ activeModal, onClose, card }) {
+function ItemModal({ activeModal, onClose, card, isOpen }) {
   return (
-    <div className={`modal ${activeModal === 'preview' && 'modal_opened'}`}>
+    <div className={`modal ${isOpen && 'modal_opened'}`}>
       <div className="modal__content modal__content_type_image">
         <button onClick={onClose} className="modal__close">
           <img
@@ -14,7 +14,11 @@ function ItemModal({ activeModal, onClose, card }) {
             className="modal__close-icon"
           />
         </button>
-        <img src={card.link} alt="" className="modal__image" />
+        <img
+          src={card.link}
+          alt={card.name || 'Preview image'}
+          className="modal__image"
+        />
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>

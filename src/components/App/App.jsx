@@ -60,6 +60,7 @@ function App() {
           buttonText="Add garment"
           activeModal={activeModal}
           onClose={closeActiveModal}
+          isOpen={activeModal === 'add-garment'}
         >
           <label htmlFor="name" className="modal__label">
             Name {''}
@@ -124,6 +125,7 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
+          isOpen={activeModal === 'preview'}
         />
       </div>
     </div>
