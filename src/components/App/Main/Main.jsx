@@ -8,7 +8,7 @@ import { CurrentTemperatureUnitContext } from '../../../contexts/CurrentTemperat
 function Main({ weatherData, handleCardClick }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temperature =
-    currentTemperatureUnit === 'F' ? weatherData.temp.F : weatherData.temp.C; // Add this line here
+    currentTemperatureUnit === 'F' ? weatherData.temp.F : weatherData.temp.C;
 
   return (
     <main>
