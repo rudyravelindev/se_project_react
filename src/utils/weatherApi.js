@@ -13,7 +13,15 @@ export const getWeather = ({ latitude, longitude }, APIkey) => {
 export function filterWeatherData(data) {
   const result = {};
   result.city = data.name;
-  result.temp = { F: Math.round(data.main.temp) };
+
+  // Calculate both F and C temperatures
+  const tempF = Math.round(data.main.temp);
+  const tempC = Math.round(((tempF - 32) * 5) / 9); // Convert F to C
+  result.temp = {
+    F: tempF,
+    C: tempC,
+  };
+
   result.isDay = isDay(data.sys, Date.now());
   result.type = getWeatherType(data.main.temp);
 
@@ -45,6 +53,42 @@ export function filterWeatherData(data) {
 
   return result;
 }
+
+// export function filterWeatherData(data) {
+//   const result = {};
+//   result.city = data.name;
+//   result.temp = { F: Math.round(data.main.temp) };
+//   result.isDay = isDay(data.sys, Date.now());
+//   result.type = getWeatherType(data.main.temp);
+
+//   const condition = data.weather[0].main.toLowerCase();
+//   switch (condition) {
+//     case 'clouds':
+//       result.condition = 'clouds';
+//       break;
+//     case 'clear':
+//       result.condition = 'clear';
+//       break;
+//     case 'thunderstorm':
+//       result.condition = 'thunderstorm';
+//       break;
+//     case 'rain':
+//       result.condition = 'rain';
+//       break;
+//     case 'snow':
+//       result.condition = 'snow';
+//       break;
+//     case 'mist':
+//     case 'haze':
+//       result.condition = 'fog';
+//       break;
+//     default:
+//       result.condition = condition;
+//   }
+//   console.log('Filtered Result:', result);
+
+//   return result;
+// }
 
 export const isDay = ({ sunrise, sunset }, now) => {
   return sunrise * 1000 < now && now < sunset * 1000;

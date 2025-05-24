@@ -20,12 +20,18 @@
   border-radius: 50%;
   left: 0;
   transition: all 0.4s;
+  z-index: 1; /* Add this line */
 }
 
 .toggle-switch__text {
   color: grey;
   position: absolute;
   top: 5px;
+  z-index: 2; /* Add this line */
+}
+
+.toggle-switch__text_active {
+  color: white;
 }
 
 .toggle-switch__text_F {
