@@ -1,11 +1,11 @@
 import './Main.css';
 import WeatherCard from './WeatherCard/WeatherCard';
 import ItemCard from './ItemCard/ItemCard';
-import { defaultClothingItems } from '../../../utils/constants';
+// import { defaultClothingItems } from '../../../utils/constants';
 import { useContext } from 'react';
 import { CurrentTemperatureUnitContext } from '../../../contexts/CurrentTemperatureUnitContext';
 
-function Main({ weatherData, handleCardClick }) {
+function Main({ weatherData, handleCardClick, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temperature =
     currentTemperatureUnit === 'F' ? weatherData.temp.F : weatherData.temp.C;
@@ -19,12 +19,21 @@ function Main({ weatherData, handleCardClick }) {
           wear:
         </p>
         <ul className="cards__list">
-          {defaultClothingItems
+          {clothingItems
+
             .filter((item) => {
+              console.log('Weather data:', weatherData);
+              console.log('Item weather:', item.weather);
+              console.log('Weather type:', weatherData.type);
+              console.log(
+                'Does item match?',
+                item.weather === weatherData.type
+              );
               return item.weather === weatherData.type;
             })
 
             .map((item) => {
+              console.log('Item being rendered:', item);
               return (
                 <ItemCard
                   key={item._id}
