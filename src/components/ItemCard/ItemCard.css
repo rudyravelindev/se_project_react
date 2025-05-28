@@ -1,8 +1,10 @@
+/* Existing styles */
 .item-card {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
+  transition: transform 0.3s ease; /* Added transition here for smooth effect */
 }
 
 .item-card__image {
@@ -12,13 +14,25 @@
 }
 
 .item-card__name {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0;
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
   font-size: 16px;
+  line-height: 20px;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 2px 12px;
+  background-color: white;
+  color: #00000099;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 20px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+/* New hover effect */
+.item-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

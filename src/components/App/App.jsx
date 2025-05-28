@@ -68,6 +68,15 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    setClothingItems(
+      defaultClothingItems.map((item) => ({
+        ...item,
+        imageUrl: item.link, // Copy link to imageUrl
+      }))
+    );
+  }, []);
+
   const handleAddItemSubmit = (newItem) => {
     const itemWithId = {
       ...newItem,
@@ -105,7 +114,8 @@ function App() {
               element={
                 <Profile
                   clothingItems={clothingItems}
-                  onCreateModal={handleAddClick}
+                  onAddItem={handleAddClick}
+                  onCardClick={handleCardClick}
                 />
               }
             ></Route>

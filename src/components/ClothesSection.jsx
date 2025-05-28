@@ -1,4 +1,3 @@
-import ItemModal from './App/ItemModal/ItemModal';
 import './ClothesSection.css';
 import ItemCard from '../components/ItemCard/ItemCard';
 
@@ -7,6 +6,7 @@ function ClothesSection({
   onAddItem,
   onSelectCard,
   weatherType,
+  onCardClick,
 }) {
   return (
     <div className="clothes-section">
@@ -21,7 +21,7 @@ function ClothesSection({
           <ItemCard
             key={item._id || item.id}
             item={item}
-            onSelectCard={onSelectCard}
+            onCardClick={onCardClick}
           />
         ))}
       </div>
