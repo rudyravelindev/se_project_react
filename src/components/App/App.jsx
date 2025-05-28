@@ -15,6 +15,7 @@ import { coordinates, APIkey } from '../../utils/constants';
 import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import { defaultClothingItems } from '../../utils/constants';
+import Profile from '../Profile';
 
 function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
@@ -99,7 +100,15 @@ function App() {
                 />
               }
             ></Route>
-            <Route path="/profile" element={<p>Profile</p>}></Route>
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  clothingItems={clothingItems}
+                  onCreateModal={handleAddClick}
+                />
+              }
+            ></Route>
           </Routes>
 
           <AddItemModal

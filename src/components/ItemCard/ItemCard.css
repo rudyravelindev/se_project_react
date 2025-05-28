@@ -1,0 +1,24 @@
+.item-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.item-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-card__name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 16px;
+}
