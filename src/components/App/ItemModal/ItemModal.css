@@ -1,0 +1,34 @@
+.modal__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align items to top */
+  margin-top: 16px;
+  width: 100%;
+}
+
+.modal__text-container {
+  flex-grow: 1; /* Takes available space */
+}
+
+.modal__caption {
+  margin-bottom: 4px; /* Space between name and weather */
+}
+
+.modal__delete {
+  color: #ff4d00;
+  background: none;
+  border: none;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 101;
+  height: 24;
+  top: 624px;
+  left: 836px;
+  padding: 20px;
+}
+
+.modal__delete:hover {
+  opacity: 0.6;
+}

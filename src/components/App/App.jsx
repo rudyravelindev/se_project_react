@@ -18,7 +18,12 @@ import { defaultClothingItems } from '../../utils/constants';
 import Profile from '../Profile';
 
 function App() {
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState(
+    defaultClothingItems.map((item) => ({
+      ...item,
+      imageUrl: item.link, // Copy link to imageUrl
+    }))
+  );
 
   const [weatherData, setWeatherData] = useState({
     type: '',
@@ -40,9 +45,15 @@ function App() {
     setCurrentTemperatureUnit(currentTemperatureUnit === 'F' ? 'C' : 'F');
   };
 
+  // const handleCardClick = (card) => {
+  //   setActiveModal('preview');
+  //   setSelectedCard(card);
+  // };
+
   const handleCardClick = (card) => {
-    setActiveModal('preview');
+    console.log('Card clicked:', card); // Debug log
     setSelectedCard(card);
+    setActiveModal('preview');
   };
 
   const handleAddClick = () => {
@@ -52,7 +63,13 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal('');
   };
-
+  const handleDeleteItem = (cardToDelete) => {
+    console.log('Attempting to delete:', cardToDelete._id); // Debug log
+    setClothingItems((prevItems) =>
+      prevItems.filter((item) => item._id !== cardToDelete._id)
+    );
+    closeActiveModal();
+  };
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -66,15 +83,6 @@ function App() {
       .catch((error) => {
         console.error('Error fetching weather data:', error);
       });
-  }, []);
-
-  useEffect(() => {
-    setClothingItems(
-      defaultClothingItems.map((item) => ({
-        ...item,
-        imageUrl: item.link, // Copy link to imageUrl
-      }))
-    );
   }, []);
 
   const handleAddItemSubmit = (newItem) => {
@@ -114,7 +122,7 @@ function App() {
               element={
                 <Profile
                   clothingItems={clothingItems}
-                  onAddItem={handleAddClick}
+                  onAddItem={handleAddItemSubmit}
                   onCardClick={handleCardClick}
                 />
               }
@@ -132,6 +140,7 @@ function App() {
             card={selectedCard}
             onClose={closeActiveModal}
             isOpen={activeModal === 'preview'}
+            onDelete={handleDeleteItem}
           />
         </div>
       </div>
