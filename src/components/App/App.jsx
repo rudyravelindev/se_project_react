@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import { Routes, Route } from 'react-router-dom';
+
 import 'normalize.css';
 import '../../vendor/fonts/fonts.css';
 import './App.css';
@@ -86,11 +88,20 @@ function App() {
       <div className="page">
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            clothingItems={clothingItems}
-          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            ></Route>
+            <Route path="/profile" element={<p>Profile</p>}></Route>
+          </Routes>
+
           <AddItemModal
             isOpen={activeModal === 'add-garment'}
             onClose={closeActiveModal}
