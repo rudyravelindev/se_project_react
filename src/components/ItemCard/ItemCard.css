@@ -1,10 +1,9 @@
-/* Existing styles */
-.item-card {
+Existing styles .item-card {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease; /* Added transition here for smooth effect */
+  transition: transform 0.3s ease;
 }
 
 .item-card__image {
@@ -31,8 +30,7 @@
   z-index: 1;
 }
 
-/* New hover effect */
-.item-card:hover {
+.tem-card:hover {
   transform: scale(1.02);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
