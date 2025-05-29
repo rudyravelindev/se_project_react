@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { Routes, Route } from 'react-router-dom';
+import { getItems, addItem, deleteItem } from '../../utils/api';
 
 import 'normalize.css';
 import '../../vendor/fonts/fonts.css';
@@ -45,16 +46,15 @@ function App() {
     setCurrentTemperatureUnit(currentTemperatureUnit === 'F' ? 'C' : 'F');
   };
 
-  // const handleCardClick = (card) => {
-  //   setActiveModal('preview');
-  //   setSelectedCard(card);
-  // };
-
   const handleCardClick = (card) => {
-    console.log('Card clicked:', card); // Debug log
-    setSelectedCard(card);
     setActiveModal('preview');
+    setSelectedCard(card);
   };
+
+  // const handleCardClick = (card) => {
+  //   setSelectedCard(card);
+  //   setActiveModal('preview');
+  // };
 
   const handleAddClick = () => {
     setActiveModal('add-garment');
@@ -64,12 +64,24 @@ function App() {
     setActiveModal('');
   };
   const handleDeleteItem = (cardToDelete) => {
-    console.log('Attempting to delete:', cardToDelete._id); // Debug log
-    setClothingItems((prevItems) =>
-      prevItems.filter((item) => item._id !== cardToDelete._id)
-    );
-    closeActiveModal();
+    console.log('Attempting to delete:', cardToDelete._id);
+    deleteItem(cardToDelete._id)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== cardToDelete._id)
+        );
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
+
+  // const handleDeleteItem = (cardToDelete) => {
+  //   console.log('Attempting to delete:', cardToDelete._id); // Debug log
+  //   setClothingItems((prevItems) =>
+  //     prevItems.filter((item) => item._id !== cardToDelete._id)
+  //   );
+  //   closeActiveModal();
+  // };
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -85,15 +97,33 @@ function App() {
       });
   }, []);
 
+  // Api
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
+  //
+
+  // const handleAddItemSubmit = (newItem) => {
+  //   const itemWithId = {
+  //     ...newItem,
+  //     _id: Math.random().toString(36).substring(2, 9),
+  //   };
+
+  //   setClothingItems([itemWithId, ...clothingItems]);
+
+  //   closeActiveModal();
+  // };
   const handleAddItemSubmit = (newItem) => {
-    const itemWithId = {
-      ...newItem,
-      _id: Math.random().toString(36).substring(2, 9),
-    };
-
-    setClothingItems([itemWithId, ...clothingItems]);
-
-    closeActiveModal();
+    addItem(newItem)
+      .then((createdItem) => {
+        setClothingItems([createdItem, ...clothingItems]);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   return (

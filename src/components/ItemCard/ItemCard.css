@@ -1,4 +1,4 @@
-Existing styles .item-card {
+.item-card {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
@@ -30,7 +30,7 @@ Existing styles .item-card {
   z-index: 1;
 }
 
-.tem-card:hover {
+.item-card:hover {
   transform: scale(1.02);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
