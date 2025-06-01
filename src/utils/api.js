@@ -27,3 +27,10 @@ export const deleteItem = (id) => {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
 };
+
+export const checkResponse = (res) => {
+  if (!res.ok) {
+    throw new Error(`HTTP error! Status: ${res.status}`);
+  }
+  return res.json();
+};
