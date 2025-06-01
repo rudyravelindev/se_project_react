@@ -18,6 +18,7 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
   const handleWeatherTypeChange = (e) => {
     setWeatherType(e.target.value);
   };
+
   const resetForm = () => {
     setName('');
     setImageUrl('');
@@ -26,11 +27,13 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({
+    const newItem = {
       name: name.trim(),
       imageUrl: imageUrl.trim(),
       weather: weatherType.toLowerCase(),
-    });
+    };
+    console.log('Sending this data to API:', newItem);
+    onAddItem(newItem);
     resetForm();
   };
 

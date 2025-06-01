@@ -1,17 +1,17 @@
 .modal__footer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* Align items to top */
+  align-items: flex-start;
   margin-top: 16px;
   width: 100%;
 }
 
 .modal__text-container {
-  flex-grow: 1; /* Takes available space */
+  flex-grow: 1;
 }
 
 .modal__caption {
-  margin-bottom: 4px; /* Space between name and weather */
+  margin-bottom: 4px;
 }
 
 .modal__delete {
@@ -22,13 +22,28 @@
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  width: 101;
-  height: 24;
-  top: 624px;
-  left: 836px;
+  width: 101px;
+  height: 24px;
   padding: 20px;
 }
 
 .modal__delete:hover {
   opacity: 0.6;
+}
+.modal__image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  max-height: 498px;
+  width: 100%;
+}
+
+.modal__image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
 }

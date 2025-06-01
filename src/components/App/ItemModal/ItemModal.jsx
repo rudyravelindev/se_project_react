@@ -14,11 +14,13 @@ function ItemModal({ activeModal, onClose, card, isOpen, onDelete }) {
             className="modal__close-icon"
           />
         </button>
-        <img
-          src={card.link || card.imageUrl}
-          alt={card.name || 'Preview image'}
-          className="modal__image"
-        />
+        <div className="modal__image-container">
+          <img
+            src={card.link || card.imageUrl}
+            alt={card.name || 'Preview image'}
+            className="modal__image"
+          />
+        </div>
         <div className="modal__footer">
           <div className="modal__text-container">
             <h2 className="modal__caption">{card.name}</h2>

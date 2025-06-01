@@ -15,16 +15,10 @@ import { getWeather, filterWeatherData } from '../../utils/weatherApi';
 import { coordinates, APIkey } from '../../utils/constants';
 import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
 import AddItemModal from '../AddItemModal/AddItemModal';
-import { defaultClothingItems } from '../../utils/constants';
 import Profile from '../Profile';
 
 function App() {
-  const [clothingItems, setClothingItems] = useState(
-    defaultClothingItems.map((item) => ({
-      ...item,
-      imageUrl: item.link, // Copy link to imageUrl
-    }))
-  );
+  const [clothingItems, setClothingItems] = useState([]);
 
   const [weatherData, setWeatherData] = useState({
     type: '',
@@ -51,11 +45,6 @@ function App() {
     setSelectedCard(card);
   };
 
-  // const handleCardClick = (card) => {
-  //   setSelectedCard(card);
-  //   setActiveModal('preview');
-  // };
-
   const handleAddClick = () => {
     setActiveModal('add-garment');
   };
@@ -75,13 +64,6 @@ function App() {
       .catch(console.error);
   };
 
-  // const handleDeleteItem = (cardToDelete) => {
-  //   console.log('Attempting to delete:', cardToDelete._id); // Debug log
-  //   setClothingItems((prevItems) =>
-  //     prevItems.filter((item) => item._id !== cardToDelete._id)
-  //   );
-  //   closeActiveModal();
-  // };
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -107,16 +89,6 @@ function App() {
   }, []);
   //
 
-  // const handleAddItemSubmit = (newItem) => {
-  //   const itemWithId = {
-  //     ...newItem,
-  //     _id: Math.random().toString(36).substring(2, 9),
-  //   };
-
-  //   setClothingItems([itemWithId, ...clothingItems]);
-
-  //   closeActiveModal();
-  // };
   const handleAddItemSubmit = (newItem) => {
     addItem(newItem)
       .then((createdItem) => {
