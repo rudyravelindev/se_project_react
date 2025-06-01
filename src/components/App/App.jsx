@@ -87,7 +87,6 @@ function App() {
       })
       .catch(console.error);
   }, []);
-  //
 
   const handleAddItemSubmit = (newItem) => {
     addItem(newItem)
@@ -126,6 +125,7 @@ function App() {
                   clothingItems={clothingItems}
                   onAddItem={handleAddItemSubmit}
                   onCardClick={handleCardClick}
+                  handleAddClick={handleAddClick}
                 />
               }
             ></Route>

@@ -12,7 +12,14 @@ function ClothesSection({
     <div className="clothes-section">
       <div className="clothes-section__header">
         <h2 className="clothes-section__title">Your items</h2>
-        <button className="clothes-section__add-button" onClick={onAddItem}>
+        {/* <button className="clothes-section__add-button" onClick={onAddItem}>
+          + Add new
+        </button> */}
+
+        <button
+          className="clothes-section__add-button"
+          onClick={() => onAddItem()}
+        >
           + Add new
         </button>
       </div>
