@@ -3,8 +3,11 @@ import CloseIconBtn from '../../../assets/close-btn.svg';
 
 function ItemModal({ activeModal, onClose, card, isOpen, onDelete }) {
   return (
-    <div className={`modal ${isOpen && 'modal_opened'}`}>
-      <div className="modal__content modal__content_type_image">
+    <div onClick={onClose} className={`modal ${isOpen && 'modal_opened'}`}>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="modal__content modal__content_type_image"
+      >
         <button onClick={onClose} className="modal__close">
           <img
             src={CloseIconBtn}
@@ -26,6 +29,7 @@ function ItemModal({ activeModal, onClose, card, isOpen, onDelete }) {
             <h2 className="modal__caption">{card.name}</h2>
             <p className="modal__weather">Weather: {card.weather}</p>
           </div>
+
           <button className="modal__delete" onClick={() => onDelete(card)}>
             Delete item
           </button>

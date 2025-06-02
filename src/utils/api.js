@@ -28,6 +28,10 @@ export const addItem = (item) => {
 };
 
 export const deleteItem = (id) => {
+  if (id === 0 || id === '0') {
+    return Promise.reject(new Error('Cannot delete item with ID 0'));
+  }
+
   return request(`${baseUrl}/items/${id}`, {
     method: 'DELETE',
   });

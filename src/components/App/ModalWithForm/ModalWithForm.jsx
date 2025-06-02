@@ -25,7 +25,6 @@ function ModalWithForm({
         </button>
         <form onSubmit={onSubmit} className="modal__form">
           {' '}
-          {/* Add onSubmit here */}
           {children}
           <button type="submit" className="modal__submit">
             {buttonText}

@@ -35,8 +35,6 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
 
   const handleToggleSwitchChange = () => {
-    console.log('Current unit before change:', currentTemperatureUnit);
-
     setCurrentTemperatureUnit(currentTemperatureUnit === 'F' ? 'C' : 'F');
   };
 
@@ -53,7 +51,6 @@ function App() {
     setActiveModal('');
   };
   const handleDeleteItem = (cardToDelete) => {
-    console.log('Attempting to delete:', cardToDelete._id);
     deleteItem(cardToDelete._id)
       .then(() => {
         setClothingItems((prevItems) =>
@@ -67,10 +64,7 @@ function App() {
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
-        console.log('Raw Weather Data:', data);
-
         const filteredData = filterWeatherData(data);
-        console.log('Filtered Weather Data:', filteredData);
 
         setWeatherData(filteredData);
       })
@@ -79,7 +73,6 @@ function App() {
       });
   }, []);
 
-  // Api
   useEffect(() => {
     getItems()
       .then((data) => {
