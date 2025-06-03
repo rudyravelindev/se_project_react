@@ -32,7 +32,7 @@ export const deleteItem = (id) => {
     return Promise.reject(new Error('Cannot delete item with ID 0'));
   }
 
-  return request(`${baseUrl}/items/${id}`, {
+  return request(`${baseUrl}/items?/${id}`, {
     method: 'DELETE',
   });
 };

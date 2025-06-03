@@ -51,6 +51,7 @@ function App() {
     setActiveModal('');
   };
   const handleDeleteItem = (cardToDelete) => {
+    console.log('Card to delete:', cardToDelete);
     deleteItem(cardToDelete._id)
       .then(() => {
         setClothingItems((prevItems) =>
