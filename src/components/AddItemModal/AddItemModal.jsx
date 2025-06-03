@@ -31,7 +31,6 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
       name: name.trim(),
       imageUrl: imageUrl.trim(),
       weather: weatherType.toLowerCase(),
-      id: Date.now(),
     };
     console.log('Sending this data to API:', newItem);
     onAddItem(newItem);
