@@ -35,7 +35,6 @@ export default function AddItemModal({ onClose, isOpen, onAddItem }) {
     };
     console.log('Sending this data to API:', newItem);
     onAddItem(newItem);
-    resetForm();
   };
 
   useEffect(() => {

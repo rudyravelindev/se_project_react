@@ -22,11 +22,7 @@ function ClothesSection({
       </div>
       <div className="clothes-section__items">
         {clothingItems.map((item) => (
-          <ItemCard
-            key={item._id || item.id}
-            item={item}
-            onCardClick={onCardClick}
-          />
+          <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
         ))}
       </div>
     </div>
