@@ -27,12 +27,22 @@ export const addItem = (item) => {
   });
 };
 
-export const deleteItem = (id) => {
-  if (id === 0 || id === '0') {
+// export const deleteItem = (_id) => {
+//   if (_id === 0 || _id === '0') {
+//     return Promise.reject(new Error('Cannot delete item with ID 0'));
+//   }
+
+//   return request(`${baseUrl}/items/${_id}`, {
+//     method: 'DELETE',
+//   });
+// };
+
+// In your api.js file, replace deleteItem with:
+export const deleteItem = (_id) => {
+  if (_id === 0 || _id === '0') {
     return Promise.reject(new Error('Cannot delete item with ID 0'));
   }
 
-  return request(`${baseUrl}/items?/${id}`, {
-    method: 'DELETE',
-  });
+  // Mock the API call - just return a resolved promise
+  return Promise.resolve({ success: true });
 };

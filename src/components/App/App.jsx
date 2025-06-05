@@ -10,6 +10,7 @@ import Header from './Header/Header';
 import Main from './Main/Main';
 import Footer from './Footer/Footer';
 import ModalWithForm from './ModalWithForm/ModalWithForm';
+// import ItemModal from '../AddItemModal/AddItemModal';
 import ItemModal from './ItemModal/ItemModal';
 import { getWeather, filterWeatherData } from '../../utils/weatherApi';
 import { coordinates, APIkey } from '../../utils/constants';
@@ -50,12 +51,12 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal('');
   };
-  const handleDeleteItem = (cardToDelete) => {
-    console.log('Card to delete:', cardToDelete);
-    deleteItem(cardToDelete._id)
+  const handleDeleteItem = (card) => {
+    console.log('Card to delete:', card);
+    deleteItem(card._id)
       .then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== cardToDelete._id)
+          prevItems.filter((item) => item._id !== card._id)
         );
         closeActiveModal();
       })
