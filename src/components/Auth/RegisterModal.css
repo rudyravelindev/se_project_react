@@ -1,0 +1,87 @@
+Container for the entire modal .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-family: sans-serif;
+}
+
+.modal_opened {
+  display: flex;
+}
+
+.modal__container {
+  background-color: white;
+  border-radius: 16px;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* Close button */
+.modal__container button[type='button'] {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Title */
+.modal__container h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Input styles */
+.modal__container input {
+  width: 50%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+}
+
+.modal__container input:focus {
+  border-color: #0077ff;
+}
+
+/* Submit button */
+.modal__container button[type='submit'] {
+  width: 100%;
+  padding: 12px;
+  background-color: #ccc;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal__container button[type='submit']:hover {
+  background-color: #bbb;
+}
+
+/* "or Log in" text link */
+.modal__container form::after {
+  content: 'or Log In';
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  color: #555;
+  font-size: 14px;
+}

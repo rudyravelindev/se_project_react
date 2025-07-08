@@ -1,17 +1,48 @@
+import { useContext } from 'react';
+import CurrentUserContext from '../../../../contexts/CurrentUserContext';
 import './ItemCard.css';
 
-function ItemCard({ item, onCardClick }) {
+function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
+  const { currentUser } = useContext(CurrentUserContext);
+
+  const isLiked = item.likes.some((id) => id === currentUser?._id);
+  const isOwn = item.owner === currentUser?._id;
+
+  const handleLike = () => {
+    if (isLoggedIn) {
+      onCardLike({ id: item._id, isLiked });
+    }
+  };
+
   return (
-    <li className="card" onClick={() => onCardClick(item)}>
-      <div className="card__content">
-        <h2 className="card__name">{item.name}</h2>
-        <img
-          className="card__image"
-          src={item.imageUrl || item.link}
-          alt={item.name}
-        />
+    <div className="card">
+      <img
+        src={item.imageUrl}
+        alt={item.name}
+        className="card__image"
+        onClick={() => onCardClick(item)}
+      />
+      <div className="card__info">
+        <h3 className="card__name">{item.name}</h3>
+        {isLoggedIn && (
+          <button
+            className={`card__like-button ${
+              isLiked ? 'card__like-button_active' : ''
+            }`}
+            onClick={handleLike}
+            type="button"
+            aria-label={isLiked ? 'Unlike' : 'Like'}
+          />
+        )}
       </div>
-    </li>
+      {isOwn && (
+        <button
+          className="card__delete-button"
+          type="button"
+          aria-label="Delete"
+        />
+      )}
+    </div>
   );
 }
 

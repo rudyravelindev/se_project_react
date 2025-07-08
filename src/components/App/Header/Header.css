@@ -42,3 +42,29 @@
   text-decoration: none;
   color: #000;
 }
+.header__auth-buttons {
+  display: flex;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.header__signup,
+.header__signin {
+  background: none;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.header__signup:hover,
+.header__signin:hover {
+  text-decoration: underline;
+}
+
+.header__right-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+}

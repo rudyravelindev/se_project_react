@@ -1,0 +1,90 @@
+/* Base modal styles (shared with RegisterModal) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-family: sans-serif;
+}
+
+.modal_opened {
+  display: flex;
+}
+
+.modal__container {
+  background-color: white;
+  border-radius: 16px;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* Close button (X) */
+.modal__container button[type='button'] {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Title */
+.modal__container h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Input fields */
+.modal__container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 14px;
+  outline: none;
+}
+
+.modal__container input:focus {
+  border-bottom: 2px solid #0077ff;
+}
+
+/* Submit button */
+.modal__container button[type='submit'] {
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.modal__container button[type='submit']:hover {
+  background-color: #222;
+}
+
+/* "or Sign Up" text */
+.modal__container form::after {
+  content: 'or Sign Up';
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  color: #555;
+  font-size: 14px;
+}
