@@ -1,4 +1,4 @@
-Container for the entire modal .modal {
+.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -45,26 +45,42 @@ Container for the entire modal .modal {
   font-weight: 600;
 }
 
-/* Input styles */
-.modal__container input {
-  width: 50%;
-  padding: 12px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+/* Auth Form Styles - Updated with proper specificity */
+.modal__container .auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__container .auth-form__field {
+  margin-bottom: 1.5rem;
+}
+
+.modal__container .auth-form__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
   font-size: 14px;
-  outline: none;
 }
 
-.modal__container input:focus {
-  border-color: #0077ff;
-}
-
-/* Submit button */
-.modal__container button[type='submit'] {
-  width: 100%;
+/* Specific input styling that overrides the general input rules */
+.modal__container .auth-form__input {
+  width: 94% !important;
   padding: 12px;
-  background-color: #ccc;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.modal__container .auth-form__input:focus {
+  border-color: #25272a;
+}
+
+/* Specific submit button styling */
+.modal__container .auth-form__submit {
+  width: 86px !important;
+  padding: 12px;
+  background-color: #0000004d !important;
+  color: white;
   border: none;
   border-radius: 6px;
   font-weight: 600;
@@ -72,16 +88,54 @@ Container for the entire modal .modal {
   transition: background-color 0.3s ease;
 }
 
-.modal__container button[type='submit']:hover {
-  background-color: #bbb;
+.modal__container .auth-form__submit:hover {
+  background-color: #242527 !important;
 }
 
-/* "or Log in" text link */
-.modal__container form::after {
-  content: 'or Log In';
+/* "or Log in" text link - updated to use a class */
+.modal__container .auth-form__link {
   display: block;
   text-align: center;
   margin-top: 16px;
   color: #555;
   font-size: 14px;
+  text-decoration: none;
+}
+
+.modal__container .auth-form__link:hover {
+  text-decoration: none;
+  color: #c9e1fc;
+}
+.modal__container .auth-form__footer {
+  text-align: center;
+  margin-top: 16px;
+  color: #555;
+  font-size: 14px;
+}
+
+.modal__container .auth-form__footer-link {
+  background: none;
+  border: none;
+  color: #00000080;
+
+  text-decoration: none;
+  cursor: pointer;
+  padding: 50px;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 16px;
+
+  line-height: 20px;
+  letter-spacing: 0%;
+}
+
+.modal__container .auth-form__footer-link:hover {
+  color: #3f3f3f;
+}
+
+.modal__container .auth-form__footer-link {
+  background-color: #3f3f3f;
+  padding-top: 440px;
+  margin-right: 160px;
 }

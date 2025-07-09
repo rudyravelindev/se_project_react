@@ -1,4 +1,3 @@
-/* Base modal styles (shared with RegisterModal) */
 .modal {
   position: fixed;
   top: 0;
@@ -80,11 +79,11 @@
 }
 
 /* "or Sign Up" text */
-.modal__container form::after {
+/* .modal__container form::after {
   content: 'or Sign Up';
-  display: block;
+  display: flex;
   text-align: center;
   margin-top: 16px;
   color: #555;
   font-size: 14px;
-}
+} */

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RegisterModal.css';
 
-const RegisterModal = ({ isOpen, onClose, onRegister }) => {
+const RegisterModal = ({ isOpen, onClose, onRegister, onLoginClick }) => {
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
   const [email, setEmail] = useState('');
@@ -81,6 +81,16 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
 
           <button type="submit" className="auth-form__submit">
             Sign Up
+          </button>
+          <button
+            type="button"
+            className="auth-form__footer-link"
+            onClick={() => {
+              onClose();
+              onLoginClick();
+            }}
+          >
+            or Log In
           </button>
         </form>
       </div>
