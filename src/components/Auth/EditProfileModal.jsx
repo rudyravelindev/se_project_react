@@ -1,5 +1,7 @@
 import { useState, useContext } from 'react';
+import './EditProfileModal.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
 function EditProfileModal({ isOpen, onClose, onUpdateProfile, isLoading }) {
   const { currentUser } = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser?.name || '');
