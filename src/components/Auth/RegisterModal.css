@@ -45,7 +45,6 @@
   font-weight: 600;
 }
 
-/* Auth Form Styles - Updated with proper specificity */
 .modal__container .auth-form {
   display: flex;
   flex-direction: column;
@@ -63,7 +62,6 @@
   font-size: 14px;
 }
 
-/* Specific input styling that overrides the general input rules */
 .modal__container .auth-form__input {
   width: 94% !important;
   padding: 12px;
@@ -75,7 +73,6 @@
   border-color: #25272a;
 }
 
-/* Specific submit button styling */
 .modal__container .auth-form__submit {
   width: 86px !important;
   padding: 12px;
@@ -92,7 +89,6 @@
   background-color: #242527 !important;
 }
 
-/* "or Log in" text link - updated to use a class */
 .modal__container .auth-form__link {
   display: block;
   text-align: center;
@@ -117,10 +113,12 @@
   background: none;
   border: none;
   color: #00000080;
-
+  width: 120px;
+  bottom: 190px;
+  left: 140px;
   text-decoration: none;
   cursor: pointer;
-  padding: 50px;
+
   font-family: Cabinet Grotesk;
   font-weight: 700;
   font-style: Bold;
@@ -132,10 +130,4 @@
 
 .modal__container .auth-form__footer-link:hover {
   color: #3f3f3f;
-}
-
-.modal__container .auth-form__footer-link {
-  background-color: #3f3f3f;
-  padding-top: 440px;
-  margin-right: 160px;
 }

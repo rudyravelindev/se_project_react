@@ -55,7 +55,7 @@ const RegisterModal = ({ isOpen, onClose, onRegister, onLoginClick }) => {
               Name*
             </label>
             <input
-              id="name"
+              id="register-name"
               type="text"
               placeholder="Name"
               value={name}
@@ -79,19 +79,22 @@ const RegisterModal = ({ isOpen, onClose, onRegister, onLoginClick }) => {
             />
           </div>
 
-          <button type="submit" className="auth-form__submit">
-            Sign Up
-          </button>
-          <button
-            type="button"
-            className="auth-form__footer-link"
-            onClick={() => {
-              onClose();
-              onLoginClick();
-            }}
-          >
-            or Log In
-          </button>
+          <div className="auth-form__footer-container">
+            <button type="submit" className="auth-form__submit">
+              Sign Up
+            </button>
+            <a
+              href="#"
+              className="auth-form__footer-link"
+              onClick={(e) => {
+                e.preventDefault();
+                onClose();
+                onLoginClick();
+              }}
+            >
+              or Log In
+            </a>
+          </div>
         </form>
       </div>
     </div>
