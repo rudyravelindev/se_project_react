@@ -68,3 +68,11 @@
   gap: 20px;
   margin-left: auto;
 }
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  opacity: 1;
+  left: 1320px;
+  border-width: 1px;
+  border-radius: 50%;
+}

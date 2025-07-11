@@ -13,6 +13,7 @@ function Header({
   weatherData,
   onRegisterClick,
   onLoginClick,
+  onLogoutClick,
 }) {
   const { currentTemperatureUnit, handleToggleSwitchChange } = useContext(
     CurrentTemperatureUnitContext

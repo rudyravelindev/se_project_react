@@ -52,3 +52,14 @@ export function login({ email, password }) {
     body: JSON.stringify({ email, password }),
   });
 }
+
+export const updateProfile = (data, token) => {
+  return request(`${baseUrl}/users/me`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+};

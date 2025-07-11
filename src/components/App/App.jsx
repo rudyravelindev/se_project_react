@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { getItems, addItem, deleteItem } from '../../utils/api';
 import { register, login, checkToken } from '../../utils/auth';
+import { updateProfile } from '../../utils/api';
 
 import 'normalize.css';
 import '../../vendor/fonts/fonts.css';
@@ -19,6 +20,8 @@ import Profile from '../../components/Profile';
 import RegisterModal from '../../components/Auth/RegisterModal';
 import LoginModal from '../../components/Auth/LoginModal';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import SideBar from '../SideBar';
+import EditProfileModal from '../Auth/EditProfileModal';
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [weatherData, setWeatherData] = useState({
@@ -35,6 +38,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
 
   // Check token on app load
   useEffect(() => {
@@ -113,9 +117,11 @@ function App() {
   const handleRegister = async ({ name, avatar, email, password }) => {
     try {
       const data = await register({ name, avatar, email, password });
+
       localStorage.setItem('jwt', data.token);
       setIsLoggedIn(true);
-      setCurrentUser(data.user);
+      setCurrentUser(data);
+
       setIsRegisterModalOpen(false);
     } catch (err) {
       console.error('Registration failed:', err);
@@ -140,8 +146,25 @@ function App() {
     setCurrentUser(null);
   };
 
+  const handleEditProfileClick = () => {
+    setIsEditProfileModalOpen(true);
+  };
+
   const ProtectedRoute = ({ children }) => {
     return isLoggedIn ? children : <Navigate to="/" />;
+  };
+
+  const handleProfileUpdate = async ({ name, avatar }) => {
+    try {
+      const token = localStorage.getItem('jwt');
+      const updatedUser = await updateProfile({ name, avatar }, token);
+
+      setCurrentUser(updatedUser);
+      setIsEditProfileModalOpen(false);
+    } catch (error) {
+      console.error('Update failed:', error);
+      // Optional: Add user-facing error message
+    }
   };
 
   return (
@@ -177,10 +200,12 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Profile
+                      onEditProfile={handleEditProfileClick}
                       clothingItems={clothingItems}
                       onCardClick={handleCardClick}
                       handleAddClick={handleAddClick}
                       currentUser={currentUser}
+                      onLogout={handleLogout}
                     />
                   </ProtectedRoute>
                 }
@@ -215,6 +240,11 @@ function App() {
               isOpen={isLoginModalOpen}
               onClose={() => setIsLoginModalOpen(false)}
               onLogin={handleLogin}
+            />
+            <EditProfileModal
+              isOpen={isEditProfileModalOpen}
+              onClose={() => setIsEditProfileModalOpen(false)}
+              onUpdateProfile={handleProfileUpdate}
             />
           </div>
         </div>
