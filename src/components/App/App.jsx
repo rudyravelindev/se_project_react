@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { getItems, addItem, deleteItem } from '../../utils/api';
 import { register, login, checkToken } from '../../utils/auth';
 import { updateProfile } from '../../utils/api';
+import { addLike, removeLike } from '../../utils/api';
 
 import 'normalize.css';
 import '../../vendor/fonts/fonts.css';
@@ -108,6 +109,8 @@ function App() {
     const token = localStorage.getItem('jwt');
     addItem(newItem, token)
       .then((createdItem) => {
+        console.log('Item created successfully:', createdItem); // Add this line
+
         setClothingItems([createdItem, ...clothingItems]);
         closeActiveModal();
       })
@@ -163,10 +166,31 @@ function App() {
       setIsEditProfileModalOpen(false);
     } catch (error) {
       console.error('Update failed:', error);
-      // Optional: Add user-facing error message
     }
   };
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem('jwt');
 
+    if (isLiked) {
+      // Unlike the item
+      removeLike(id, token)
+        .then((updatedItem) => {
+          setClothingItems((prevItems) =>
+            prevItems.map((item) => (item._id === id ? updatedItem : item))
+          );
+        })
+        .catch(console.error);
+    } else {
+      // Like the item
+      addLike(id, token)
+        .then((updatedItem) => {
+          setClothingItems((prevItems) =>
+            prevItems.map((item) => (item._id === id ? updatedItem : item))
+          );
+        })
+        .catch(console.error);
+    }
+  };
   return (
     <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
       <CurrentTemperatureUnitContext.Provider
@@ -192,6 +216,7 @@ function App() {
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     isLoggedIn={isLoggedIn}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
@@ -206,6 +231,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       currentUser={currentUser}
                       onLogout={handleLogout}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }

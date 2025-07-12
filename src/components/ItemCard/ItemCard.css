@@ -1,4 +1,4 @@
-.item-card {
+/* .item-card {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
@@ -42,3 +42,21 @@
   transform: scale(1.02);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.item-card__like-button {
+  width: 20px;
+  height: 20px;
+  background: transparent url('../../assets/like.svg') center no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.item-card__like-button:hover {
+  opacity: 0.6;
+}
+
+.item-card__like-button_active {
+  background-image: url('../../assets/liked.svg');
+} */

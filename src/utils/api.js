@@ -1,4 +1,5 @@
 const baseUrl = 'http://localhost:3001';
+import { BASE_URL } from './constants';
 
 export const checkResponse = (res) => {
   if (!res.ok) {
@@ -62,4 +63,23 @@ export const updateProfile = (data, token) => {
     },
     body: JSON.stringify(data),
   });
+};
+export const addLike = (itemId, token) => {
+  return fetch(`${BASE_URL}/items/${itemId}/likes`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
+
+export const removeLike = (itemId, token) => {
+  return fetch(`${BASE_URL}/items/${itemId}/likes`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
 };
