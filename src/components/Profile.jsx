@@ -14,7 +14,6 @@ export default function Profile({
 }) {
   const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
 
-  // Filter to show only current user's items
   const userItems = clothingItems.filter(
     (item) => item.owner === currentUser?._id
   );

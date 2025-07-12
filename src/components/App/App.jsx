@@ -109,12 +109,15 @@ function App() {
     const token = localStorage.getItem('jwt');
     addItem(newItem, token)
       .then((createdItem) => {
-        console.log('Item created successfully:', createdItem); // Add this line
+        console.log('Item created successfully:', createdItem);
 
-        setClothingItems([createdItem, ...clothingItems]);
-        closeActiveModal();
+        setClothingItems((prevItems) => [createdItem.data, ...prevItems]);
+
+        setTimeout(closeActiveModal, 200);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error('Creation failed:', error);
+      });
   };
 
   const handleRegister = async ({ name, avatar, email, password }) => {
