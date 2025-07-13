@@ -148,6 +148,11 @@ function App() {
     setIsRegisterModalOpen(false);
     setIsLoginModalOpen(true);
   };
+
+  const switchToRegisterModal = () => {
+    setIsLoginModalOpen(false);
+    setIsRegisterModalOpen(true);
+  };
   const handleLogout = () => {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
@@ -272,6 +277,7 @@ function App() {
               isOpen={isLoginModalOpen}
               onClose={() => setIsLoginModalOpen(false)}
               onLogin={handleLogin}
+              onRegisterClick={switchToRegisterModal}
             />
             <EditProfileModal
               isOpen={isEditProfileModalOpen}

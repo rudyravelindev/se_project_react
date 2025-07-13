@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './LoginModal.css';
 
-const LoginModal = ({ isOpen, onClose, onLogin }) => {
+const LoginModal = ({ isOpen, onClose, onLogin, onRegisterClick }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const isFormValid = email.trim() !== '' && password.trim() !== '';
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +34,27 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Log In</button>
+          <div className="auth-form__footer-container">
+            <button
+              type="submit"
+              className={`auth-form__submit ${
+                isFormValid ? 'auth-form__submit--active' : ''
+              }`}
+              disabled={!isFormValid}
+            >
+              Log In
+            </button>
+            <a
+              href="#"
+              className="auth-form__footer-link"
+              onClick={(e) => {
+                e.preventDefault();
+                onRegisterClick();
+              }}
+            >
+              or Sign Up
+            </a>
+          </div>
         </form>
       </div>
     </div>
