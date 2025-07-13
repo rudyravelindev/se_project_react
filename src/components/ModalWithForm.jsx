@@ -1,5 +1,5 @@
-import '../ModalWithForm/ModalWithForm.css';
-import CloseIconBtn from '../../../assets/close-btn.svg';
+import './ModalWithForm.css';
+import CloseIconBtn from '../assets/close-btn.svg';
 
 function ModalWithForm({
   isOpen,

@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 
 import { useContext } from 'react';
 import './Header.css';
-import logo from '../../../assets/logo.svg';
-import avatar from '../../../assets/avatar.png';
-import ToggleSwitch from '../../ToggleSwitch/ToggleSwitch';
-import { CurrentTemperatureUnitContext } from '../../../contexts/CurrentTemperatureUnitContext';
-import CurrentUserContext from '../../../contexts/CurrentUserContext';
+import logo from '../assets/logo.svg';
+import avatar from '../assets/avatar.png';
+import ToggleSwitch from './ToggleSwitch';
+import { CurrentTemperatureUnitContext } from '../contexts/CurrentTemperatureUnitContext';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Header({
   handleAddClick,

@@ -16,7 +16,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
         <button type="button" onClick={onClose}>
           ✕
         </button>
-        <h3>Sign in</h3>
+        <h3>Log In</h3>
         <form onSubmit={handleSubmit}>
           <input
             type="email"
@@ -32,7 +32,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Sign in</button>
+          <button type="submit">Log In</button>
         </form>
       </div>
     </div>

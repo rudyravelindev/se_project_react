@@ -1,5 +1,5 @@
-import '../../components/AddItemModal/AddItemModal.css';
-import ModalWithForm from '../App/ModalWithForm/ModalWithForm';
+import './AddItemModal.css';
+import ModalWithForm from './ModalWithForm';
 import { useState, useEffect } from 'react';
 
 export default function AddItemModal({ onClose, isOpen, onAddItem }) {

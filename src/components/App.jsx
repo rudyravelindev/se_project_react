@@ -1,28 +1,27 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { getItems, addItem, deleteItem } from '../../utils/api';
-import { register, login, checkToken } from '../../utils/auth';
-import { updateProfile } from '../../utils/api';
-import { addLike, removeLike } from '../../utils/api';
-
+import { getItems, addItem, deleteItem } from '../utils/api';
+import { register, login, checkToken } from '../utils/auth';
+import { updateProfile } from '../utils/api';
+import { addLike, removeLike } from '../utils/api';
 import 'normalize.css';
-import '../../vendor/fonts/fonts.css';
+import '../vendor/fonts/fonts.css';
 import './App.css';
-import Header from './Header/Header';
-import Main from './Main/Main';
-import Footer from './Footer/Footer';
-import ModalWithForm from './ModalWithForm/ModalWithForm';
-import ItemModal from './ItemModal/ItemModal';
-import { getWeather, filterWeatherData } from '../../utils/weatherApi';
-import { coordinates, APIkey } from '../../utils/constants';
-import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
-import AddItemModal from '../AddItemModal/AddItemModal';
-import Profile from '../../components/Profile';
-import RegisterModal from '../../components/Auth/RegisterModal';
-import LoginModal from '../../components/Auth/LoginModal';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
-import SideBar from '../SideBar';
-import EditProfileModal from '../Auth/EditProfileModal';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import ModalWithForm from './ModalWithForm';
+import ItemModal from './ItemModal';
+import { getWeather, filterWeatherData } from '../utils/weatherApi';
+import { coordinates, APIkey } from '../utils/constants';
+import { CurrentTemperatureUnitContext } from '../contexts/CurrentTemperatureUnitContext';
+import AddItemModal from './AddItemModal';
+import Profile from './Profile';
+import RegisterModal from './RegisterModal';
+import LoginModal from './LoginModal';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import SideBar from './SideBar';
+import EditProfileModal from './EditProfileModal';
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [weatherData, setWeatherData] = useState({
@@ -145,7 +144,10 @@ function App() {
       console.error('Login failed:', err);
     }
   };
-
+  const switchToLoginModal = () => {
+    setIsRegisterModalOpen(false);
+    setIsLoginModalOpen(true);
+  };
   const handleLogout = () => {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
@@ -263,6 +265,7 @@ function App() {
               isOpen={isRegisterModalOpen}
               onClose={() => setIsRegisterModalOpen(false)}
               onRegister={handleRegister}
+              onLoginClick={switchToLoginModal}
             />
 
             <LoginModal

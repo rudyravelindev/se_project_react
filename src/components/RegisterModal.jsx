@@ -7,9 +7,20 @@ const RegisterModal = ({ isOpen, onClose, onRegister, onLoginClick }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const isFormValid =
+    email.trim() !== '' &&
+    password.trim() !== '' &&
+    name.trim() !== '' &&
+    avatar.trim() !== '';
+
   const handleSubmit = (e) => {
-    e.preventDefault();
     onRegister({ name, avatar, email, password });
+  };
+
+  const handleLoginClick = (e) => {
+    e.preventDefault();
+    onClose();
+    onLoginClick();
   };
 
   return (
@@ -80,17 +91,18 @@ const RegisterModal = ({ isOpen, onClose, onRegister, onLoginClick }) => {
           </div>
 
           <div className="auth-form__footer-container">
-            <button type="submit" className="auth-form__submit">
+            <button
+              type="submit"
+              className={`auth-form__submit ${
+                isFormValid ? 'auth-form__submit--active' : ''
+              }`}
+            >
               Sign Up
             </button>
             <a
               href="#"
               className="auth-form__footer-link"
-              onClick={(e) => {
-                e.preventDefault();
-                onClose();
-                onLoginClick();
-              }}
+              onClick={handleLoginClick}
             >
               or Log In
             </a>

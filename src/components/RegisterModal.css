@@ -127,6 +127,9 @@
   line-height: 20px;
   letter-spacing: 0%;
 }
+.modal__container .auth-form__submit.auth-form__submit--active {
+  background-color: black !important;
+}
 
 .modal__container .auth-form__footer-link:hover {
   color: #3f3f3f;
