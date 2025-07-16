@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  font-family: sans-serif;
+  font-family: 'Cabinet Grotesk', sans-serif;
 }
 
 .modal_opened {
@@ -26,8 +26,8 @@
   position: relative;
 }
 
-/* Close button (X) */
-.modal__container button[type='button'] {
+/* Close button */
+.modal__close {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -35,55 +35,86 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
+  padding: 0;
 }
 
 /* Title */
-.modal__container h3 {
-  margin-top: 0;
-  margin-bottom: 24px;
+.modal__title {
+  margin: 0 0 24px 0;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
+  color: #000;
+}
+
+/* Form styles */
+.modal__form {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Input fields */
-.modal__container input {
+.modal__input {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 16px;
+  padding: 8px 0;
+  margin-bottom: 24px;
   border: none;
-  border-bottom: 1px solid black;
-  font-size: 14px;
+  border-bottom: 1px solid #000;
+  font-size: 16px;
+  font-family: 'Cabinet Grotesk';
   outline: none;
+  background: transparent;
 }
 
-.modal__container input:focus {
+.modal__input:focus {
   border-bottom: 2px solid #0077ff;
 }
 
-/* Submit button */
-.modal__container button[type='submit'] {
-  background-color: black;
-  color: white;
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 8px;
-  transition: background-color 0.3s ease;
+/* Input labels */
+.modal__label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 16px;
 }
 
-.modal__container button[type='submit']:hover {
-  background-color: #222;
-}
-
-/* "or Sign Up" text */
-/* .modal__container form::after {
-  content: 'or Sign Up';
+/* Buttons container */
+.modal__buttons {
   display: flex;
-  text-align: center;
-  margin-top: 16px;
-  color: #555;
-  font-size: 14px;
-} */
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Primary button */
+.modal__submit {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  font-size: 16px;
+}
+
+.modal__submit:disabled {
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: not-allowed;
+}
+
+/* Alternative button */
+.modal__alt-button {
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s ease;
+  font-size: 16px;
+}
+
+.modal__alt-button:hover {
+  opacity: 0.6;
+}

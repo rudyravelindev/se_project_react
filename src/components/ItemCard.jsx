@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
-
 import './ItemCard.css';
 
 function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
@@ -16,19 +15,22 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
   };
 
   return (
-    <div className="card">
-      <img
-        src={item.imageUrl}
-        alt={item.name}
-        className="card__image"
-        onClick={() => onCardClick(item)}
-      />
-      <div className="card__info">
-        <h3 className="card__name">{item.name}</h3>
+    <div className="item-card">
+      <div className="item-card__image-container">
+        <img
+          src={item.imageUrl}
+          alt={item.name}
+          className="item-card__image"
+          onClick={() => onCardClick(item)}
+        />
+      </div>
+      <div className="item-card__info">
+        <h3 className="item-card__name">{item.name}</h3>
+
         {isLoggedIn && (
           <button
-            className={`card__like-button ${
-              isLiked ? 'card__like-button_active' : ''
+            className={`item-card__like-button ${
+              isLiked ? 'item-card__like-button_active' : ''
             }`}
             onClick={handleLike}
             type="button"
@@ -36,9 +38,10 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
           />
         )}
       </div>
+
       {isOwn && (
         <button
-          className="card__delete-button"
+          className="item-card__delete-button"
           type="button"
           aria-label="Delete"
         />

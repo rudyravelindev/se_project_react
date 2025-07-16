@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import './ClothesSection.css';
 import ItemCard from './ItemCard';
 import CurrentUserContext from '../contexts/CurrentUserContext';
+
 function ClothesSection({ clothingItems, onAddItem, onCardClick, onCardLike }) {
   const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
 
@@ -32,7 +33,6 @@ function ClothesSection({ clothingItems, onAddItem, onCardClick, onCardLike }) {
               onCardClick={onCardClick}
               onCardLike={onCardLike}
               isLoggedIn={isLoggedIn}
-              currentUser={currentUser}
             />
           ))
         ) : (

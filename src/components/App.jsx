@@ -22,6 +22,8 @@ import LoginModal from './LoginModal';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import SideBar from './SideBar';
 import EditProfileModal from './EditProfileModal';
+import ProtectedRoute from './ProtectedRoute';
+
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [weatherData, setWeatherData] = useState({
@@ -39,6 +41,7 @@ function App() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Check token on app load
   useEffect(() => {
@@ -71,6 +74,37 @@ function App() {
       .catch(console.error);
   }, []);
 
+  // Handle escape key press for all modals
+  useEffect(() => {
+    if (
+      !activeModal &&
+      !isRegisterModalOpen &&
+      !isLoginModalOpen &&
+      !isEditProfileModalOpen
+    )
+      return;
+
+    const handleEscClose = (e) => {
+      if (e.key === 'Escape') {
+        closeActiveModal();
+        setIsRegisterModalOpen(false);
+        setIsLoginModalOpen(false);
+        setIsEditProfileModalOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscClose);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscClose);
+    };
+  }, [
+    activeModal,
+    isRegisterModalOpen,
+    isLoginModalOpen,
+    isEditProfileModalOpen,
+  ]);
+
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === 'F' ? 'C' : 'F');
   };
@@ -93,6 +127,7 @@ function App() {
   };
 
   const handleDeleteItem = (card) => {
+    setIsLoading(true);
     const token = localStorage.getItem('jwt');
     deleteItem(card._id, token)
       .then(() => {
@@ -101,39 +136,39 @@ function App() {
         );
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   const handleAddItemSubmit = (newItem) => {
+    setIsLoading(true);
     const token = localStorage.getItem('jwt');
     addItem(newItem, token)
       .then((createdItem) => {
-        console.log('Item created successfully:', createdItem);
-
         setClothingItems((prevItems) => [createdItem.data, ...prevItems]);
-
-        setTimeout(closeActiveModal, 200);
+        closeActiveModal();
       })
-      .catch((error) => {
-        console.error('Creation failed:', error);
-      });
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   const handleRegister = async ({ name, avatar, email, password }) => {
+    setIsLoading(true);
     try {
       const data = await register({ name, avatar, email, password });
-
       localStorage.setItem('jwt', data.token);
       setIsLoggedIn(true);
       setCurrentUser(data);
-
       setIsRegisterModalOpen(false);
     } catch (err) {
       console.error('Registration failed:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleLogin = async ({ email, password }) => {
+    setIsLoading(true);
     try {
       const data = await login({ email, password });
       localStorage.setItem('jwt', data.token);
@@ -142,8 +177,11 @@ function App() {
       setIsLoginModalOpen(false);
     } catch (err) {
       console.error('Login failed:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   const switchToLoginModal = () => {
     setIsRegisterModalOpen(false);
     setIsLoginModalOpen(true);
@@ -153,6 +191,7 @@ function App() {
     setIsLoginModalOpen(false);
     setIsRegisterModalOpen(true);
   };
+
   const handleLogout = () => {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
@@ -163,26 +202,23 @@ function App() {
     setIsEditProfileModalOpen(true);
   };
 
-  const ProtectedRoute = ({ children }) => {
-    return isLoggedIn ? children : <Navigate to="/" />;
-  };
-
   const handleProfileUpdate = async ({ name, avatar }) => {
+    setIsLoading(true);
     try {
       const token = localStorage.getItem('jwt');
       const updatedUser = await updateProfile({ name, avatar }, token);
-
       setCurrentUser(updatedUser);
       setIsEditProfileModalOpen(false);
     } catch (error) {
       console.error('Update failed:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem('jwt');
-
     if (isLiked) {
-      // Unlike the item
       removeLike(id, token)
         .then((updatedItem) => {
           setClothingItems((prevItems) =>
@@ -191,7 +227,6 @@ function App() {
         })
         .catch(console.error);
     } else {
-      // Like the item
       addLike(id, token)
         .then((updatedItem) => {
           setClothingItems((prevItems) =>
@@ -201,6 +236,7 @@ function App() {
         .catch(console.error);
     }
   };
+
   return (
     <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
       <CurrentTemperatureUnitContext.Provider
@@ -216,7 +252,6 @@ function App() {
               onRegisterClick={() => setIsRegisterModalOpen(true)}
               onLogoutClick={handleLogout}
             />
-
             <Routes>
               <Route
                 path="/"
@@ -233,13 +268,12 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <Profile
                       onEditProfile={handleEditProfileClick}
                       clothingItems={clothingItems}
                       onCardClick={handleCardClick}
                       handleAddClick={handleAddClick}
-                      currentUser={currentUser}
                       onLogout={handleLogout}
                       onCardLike={handleCardLike}
                     />
@@ -247,16 +281,14 @@ function App() {
                 }
               />
             </Routes>
-
             <Footer />
-
             {/* All modals */}
             <AddItemModal
               isOpen={activeModal === 'add-garment'}
               onClose={closeActiveModal}
               onAddItem={handleAddItemSubmit}
+              buttonText={isLoading ? 'Saving...' : 'Add garment'}
             />
-
             <ItemModal
               activeModal={activeModal}
               card={selectedCard}
@@ -265,24 +297,25 @@ function App() {
               onDelete={handleDeleteItem}
               isLoggedIn={isLoggedIn}
             />
-
             <RegisterModal
               isOpen={isRegisterModalOpen}
               onClose={() => setIsRegisterModalOpen(false)}
               onRegister={handleRegister}
               onLoginClick={switchToLoginModal}
+              buttonText={isLoading ? 'Saving...' : 'Sign up'}
             />
-
             <LoginModal
               isOpen={isLoginModalOpen}
               onClose={() => setIsLoginModalOpen(false)}
               onLogin={handleLogin}
               onRegisterClick={switchToRegisterModal}
+              buttonText={isLoading ? 'Signing in...' : 'Sign in'}
             />
             <EditProfileModal
               isOpen={isEditProfileModalOpen}
               onClose={() => setIsEditProfileModalOpen(false)}
               onUpdateProfile={handleProfileUpdate}
+              buttonText={isLoading ? 'Saving...' : 'Save changes'}
             />
           </div>
         </div>

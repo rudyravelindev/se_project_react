@@ -1,0 +1,39 @@
+/* Add to your AuthModal.css or RegisterModal.css */
+.auth-modal__buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.auth-modal__submit {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.auth-modal__submit:disabled {
+  background: rgba(0, 0, 0, 0.3);
+  cursor: not-allowed;
+}
+
+.auth-modal__alt-button {
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+
+.auth-modal__alt-button:hover {
+  opacity: 0.6;
+}

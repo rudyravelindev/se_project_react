@@ -1,115 +1,100 @@
 import React, { useState } from 'react';
+import ModalWithForm from './ModalWithForm';
+import Input from './Input';
+import './AuthModal.css';
 import './RegisterModal.css';
 
-const RegisterModal = ({ isOpen, onClose, onRegister, onLoginClick }) => {
-  const [name, setName] = useState('');
-  const [avatar, setAvatar] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const RegisterModal = ({
+  isOpen,
+  onClose,
+  onRegister,
+  onLoginClick,
+  isLoading,
+}) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    avatar: '',
+    email: '',
+    password: '',
+  });
 
   const isFormValid =
-    email.trim() !== '' &&
-    password.trim() !== '' &&
-    name.trim() !== '' &&
-    avatar.trim() !== '';
+    formData.email.trim() !== '' &&
+    formData.password.trim() !== '' &&
+    formData.name.trim() !== '' &&
+    formData.avatar.trim() !== '';
 
-  const handleSubmit = (e) => {
-    onRegister({ name, avatar, email, password });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleLoginClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    onClose();
-    onLoginClick();
+    if (isFormValid) {
+      onRegister(formData);
+    }
   };
 
   return (
-    <div className={`modal ${isOpen ? 'modal_opened' : ''}`}>
-      <div className="modal__container">
-        <button type="button" onClick={onClose}>
-          ✕
+    <ModalWithForm
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      title="Sign Up"
+      buttonText="Sign Up"
+      isButtonDisabled={!isFormValid}
+      isLoading={isLoading}
+      additionalButton={
+        <button
+          type="button"
+          className="modal__alt-button"
+          onClick={(e) => {
+            e.preventDefault();
+            onLoginClick();
+          }}
+        >
+          or Log In
         </button>
-        <h3>Sign up</h3>
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="auth-form__field">
-            <label htmlFor="email" className="auth-form__label">
-              Email*
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="auth-form__input"
-              required
-            />
-          </div>
-
-          <div className="auth-form__field">
-            <label htmlFor="password" className="auth-form__label">
-              Password*
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="auth-form__input"
-              required
-            />
-          </div>
-
-          <div className="auth-form__field">
-            <label htmlFor="name" className="auth-form__label">
-              Name*
-            </label>
-            <input
-              id="register-name"
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="auth-form__input"
-              required
-            />
-          </div>
-
-          <div className="auth-form__field">
-            <label htmlFor="avatar" className="auth-form__label">
-              Avatar URL
-            </label>
-            <input
-              id="avatar"
-              type="url"
-              placeholder="Avatar URL"
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
-              className="auth-form__input"
-            />
-          </div>
-
-          <div className="auth-form__footer-container">
-            <button
-              type="submit"
-              className={`auth-form__submit ${
-                isFormValid ? 'auth-form__submit--active' : ''
-              }`}
-            >
-              Sign Up
-            </button>
-            <a
-              href="#"
-              className="auth-form__footer-link"
-              onClick={handleLoginClick}
-            >
-              or Log In
-            </a>
-          </div>
-        </form>
-      </div>
-    </div>
+      }
+    >
+      <Input
+        label="Email*"
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={handleChange}
+        required
+      />
+      <Input
+        label="Password*"
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleChange}
+        required
+      />
+      <Input
+        label="Name*"
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+      />
+      <Input
+        label="Avatar URL*"
+        type="url"
+        name="avatar"
+        placeholder="Avatar URL"
+        value={formData.avatar}
+        onChange={handleChange}
+        required
+      />
+    </ModalWithForm>
   );
 };
 

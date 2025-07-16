@@ -1,0 +1,169 @@
+/* ─────────────────────────────
+   1. OVERLAY & MODAL WRAPPER
+   ───────────────────────────── */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35); /* dim page behind the modal */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 999;
+}
+
+.modal_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ─────────────────────────────
+   2. INNER CONTAINER
+   ───────────────────────────── */
+.modal__container {
+  background: #fff;
+  width: 430px; /* tweak to taste */
+  border-radius: 16px;
+  padding: 24px 32px 32px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* ─────────────────────────────
+   3. CLOSE BUTTON (✕ icon)
+   ───────────────────────────── */
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.modal__close-icon {
+  display: block;
+}
+
+/* ─────────────────────────────
+   4. TITLES & LABELS
+   ───────────────────────────── */
+.modal__title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 28px;
+  color: #000;
+}
+
+.modal__form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #000;
+}
+
+/* ─────────────────────────────
+   5. INPUTS
+   ───────────────────────────── */
+.modal__form input[type='text'],
+.modal__form input[type='email'],
+.modal__form input[type='password'],
+.modal__form input[type='url'] {
+  width: 100%;
+  font-size: 14px;
+  border: 0;
+  border-bottom: 2px solid #000;
+  padding: 6px 0 8px;
+  margin-bottom: 24px;
+  outline: none;
+}
+
+.modal__form input::placeholder {
+  color: #909090; /* light grey placeholder */
+}
+
+/* ─────────────────────────────
+   6. FOOTER ROW (button + link)
+   ───────────────────────────── */
+.auth-form__footer-container {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* space between primary button & link */
+  margin-top: 4px;
+}
+
+/* ─────────────────────────────
+   7. PRIMARY SUBMIT BUTTON
+   ───────────────────────────── */
+.auth-form__submit {
+  background: #c5c5c5; /* grey when disabled */
+  color: #fff;
+  font-size: 14px;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 26px;
+  cursor: not-allowed;
+  transition: background 0.2s ease;
+}
+
+.auth-form__submit--active:not(:disabled) {
+  background: #006ef3; /* ← your brand colour when active */
+  cursor: pointer;
+}
+
+/* ─────────────────────────────
+   8. SECONDARY LINK‑AS‑BUTTON
+   ───────────────────────────── */
+.auth-form__footer-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #006ef3;
+  cursor: pointer;
+}
+
+/* Add to your AuthModal.css or RegisterModal.css */
+.auth-modal__buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.auth-modal__submit {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.auth-modal__submit:disabled {
+  background: rgba(0, 0, 0, 0.3);
+  cursor: not-allowed;
+}
+
+.auth-modal__alt-button {
+  background: none;
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+
+.auth-modal__alt-button:hover {
+  opacity: 0.6;
+}

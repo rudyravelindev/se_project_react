@@ -1,3 +1,4 @@
+/* RegisterModal.css */
 .modal {
   position: fixed;
   top: 0;
@@ -9,7 +10,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  font-family: sans-serif;
+  font-family: 'Cabinet Grotesk', sans-serif;
 }
 
 .modal_opened {
@@ -27,7 +28,7 @@
 }
 
 /* Close button */
-.modal__container button[type='button'] {
+.modal__close {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -35,102 +36,90 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
+  padding: 0;
 }
 
 /* Title */
-.modal__container h3 {
-  margin-top: 0;
-  margin-bottom: 24px;
+.modal__title {
+  margin: 0 0 24px 0;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
+  color: #000;
 }
 
-.modal__container .auth-form {
+/* Form styles */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.auth-form__field {
   display: flex;
   flex-direction: column;
 }
 
-.modal__container .auth-form__field {
-  margin-bottom: 1.5rem;
+.auth-form__label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 8px;
 }
 
-.modal__container .auth-form__label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #333;
-  font-size: 14px;
-}
-
-.modal__container .auth-form__input {
-  width: 94% !important;
-  padding: 12px;
-  font-size: 14px;
-  margin-bottom: 0;
-}
-
-.modal__container .auth-form__input:focus {
-  border-color: #25272a;
-}
-
-.modal__container .auth-form__submit {
-  width: 86px !important;
-  padding: 12px;
-  background-color: #0000004d !important;
-  color: white;
+.auth-form__input {
+  width: 100%;
+  padding: 8px 0;
   border: none;
-  border-radius: 6px;
-  font-weight: 600;
+  border-bottom: 1px solid #000;
+  font-size: 16px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+}
+
+.auth-form__input:focus {
+  outline: none;
+  border-bottom: 1px solid #0077ff;
+}
+
+/* Buttons container */
+.auth-form__footer-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Submit button */
+.auth-form__submit {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
-.modal__container .auth-form__submit:hover {
-  background-color: #242527 !important;
+.auth-form__submit:disabled {
+  background: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
-.modal__container .auth-form__link {
-  display: block;
-  text-align: center;
-  margin-top: 16px;
-  color: #555;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-.modal__container .auth-form__link:hover {
-  text-decoration: none;
-  color: #c9e1fc;
-}
-.modal__container .auth-form__footer {
-  text-align: center;
-  margin-top: 16px;
-  color: #555;
-  font-size: 14px;
-}
-
-.modal__container .auth-form__footer-link {
+/* Alternative button */
+.auth-form__footer-link {
   background: none;
   border: none;
-  color: #00000080;
-  width: 120px;
-  bottom: 190px;
-  left: 140px;
-  text-decoration: none;
-  cursor: pointer;
-
-  font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-style: Bold;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Cabinet Grotesk', sans-serif;
   font-size: 16px;
-
-  line-height: 20px;
-  letter-spacing: 0%;
-}
-.modal__container .auth-form__submit.auth-form__submit--active {
-  background-color: black !important;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s ease;
 }
 
-.modal__container .auth-form__footer-link:hover {
-  color: #3f3f3f;
+.auth-form__footer-link:hover {
+  opacity: 0.6;
 }

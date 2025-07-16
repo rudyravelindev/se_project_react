@@ -13,29 +13,33 @@ function request(url, options) {
 }
 
 export function getItems() {
-  return request(`${baseUrl}/items`);
+  return request(`${BASE_URL}/items`);
 }
 
 export const addItem = (item, token) => {
-  return request(`${baseUrl}/items`, {
+  return request(`${BASE_URL}/items`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`, // Consistent header casing
     },
     body: JSON.stringify(item),
   });
 };
 
-export const deleteItem = (_id) => {
-  if (_id === 0 || _id === '0') {
-    return Promise.reject(new Error('Cannot delete item with ID 0'));
-  }
-  return Promise.resolve({ success: true });
+export const deleteItem = (id, token) => {
+  // Added token parameter
+  return request(`${BASE_URL}/items/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export function register({ name, avatar, email, password }) {
-  return request(`${baseUrl}/signup`, {
+  return request(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -45,7 +49,7 @@ export function register({ name, avatar, email, password }) {
 }
 
 export function login({ email, password }) {
-  return request(`${baseUrl}/signin`, {
+  return request(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -55,7 +59,7 @@ export function login({ email, password }) {
 }
 
 export const updateProfile = (data, token) => {
-  return request(`${baseUrl}/users/me`, {
+  return request(`${BASE_URL}/users/me`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -64,22 +68,23 @@ export const updateProfile = (data, token) => {
     body: JSON.stringify(data),
   });
 };
+
 export const addLike = (itemId, token) => {
-  return fetch(`${BASE_URL}/items/${itemId}/likes`, {
+  return request(`${BASE_URL}/items/${itemId}/likes`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`, // Fixed casing
     },
-  }).then(checkResponse);
+  });
 };
 
 export const removeLike = (itemId, token) => {
-  return fetch(`${BASE_URL}/items/${itemId}/likes`, {
+  return request(`${BASE_URL}/items/${itemId}/likes`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`, // Fixed casing
     },
-  }).then(checkResponse);
+  });
 };
