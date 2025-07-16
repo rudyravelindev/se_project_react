@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useForm } from '../hooks/useForm';
+import './EditProfileModal.css';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import ModalWithForm from './ModalWithForm';
 
