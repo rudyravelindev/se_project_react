@@ -6,10 +6,19 @@ import ModalWithForm from './ModalWithForm';
 
 function EditProfileModal({ isOpen, onClose, onUpdateProfile, isLoading }) {
   const { currentUser } = useContext(CurrentUserContext);
+  console.log('Current user in EditProfileModal:', currentUser);
+
+  // const { values, handleChange } = useForm({
+  //   name: currentUser?.name || '',
+  //   avatar: currentUser?.avatar || '',
+  // });
+  if (!currentUser) return null;
+
   const { values, handleChange } = useForm({
-    name: currentUser?.name || '',
-    avatar: currentUser?.avatar || '',
+    name: currentUser.name,
+    avatar: currentUser.avatar,
   });
+  console.log('Form values after useForm:', values);
 
   const isFormValid = values.name.trim() !== '' && values.avatar.trim() !== '';
 
