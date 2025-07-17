@@ -7,13 +7,24 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
 
   const isLiked = item.likes.some((id) => id === currentUser?._id);
   const isOwn = item.owner === currentUser?._id;
+  console.log('ItemCard debug:', {
+    isLoggedIn,
+    currentUser: currentUser?._id,
+    itemOwner: item.owner,
+    isLiked,
+  });
 
-  const handleLike = () => {
-    if (isLoggedIn) {
-      onCardLike({ id: item._id, isLiked });
+  const handleLike = (e) => {
+    e.stopPropagation();
+    if (!item._id) {
+      console.error('Missing item ID!', item);
+      return;
     }
+    onCardLike({
+      id: item._id,
+      isLiked: isLiked,
+    });
   };
-
   return (
     <div className="item-card">
       <div className="item-card__image-container">
@@ -33,19 +44,11 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
               isLiked ? 'item-card__like-button_active' : ''
             }`}
             onClick={handleLike}
+            aria-label="Like button"
             type="button"
-            aria-label={isLiked ? 'Unlike' : 'Like'}
           />
         )}
       </div>
-
-      {isOwn && (
-        <button
-          className="item-card__delete-button"
-          type="button"
-          aria-label="Delete"
-        />
-      )}
     </div>
   );
 }

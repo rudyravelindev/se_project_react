@@ -38,13 +38,13 @@ function Main({
             })
 
             .map((item) => {
-              console.log('Item being rendered:', item);
               return (
                 <ItemCard
                   key={item._id}
                   item={item}
                   onCardClick={() => handleCardClick(item)}
                   onCardLike={onCardLike}
+                  isLoggedIn={isLoggedIn}
                 />
               );
             })}
