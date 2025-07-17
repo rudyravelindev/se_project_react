@@ -35,7 +35,7 @@
   transform: scale(1.05);
 }
 
-/* Card Info - MOVED TO TOP */
+/* Card Info */
 .item-card__info {
   position: absolute;
   top: 20px;

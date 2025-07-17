@@ -7,12 +7,6 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
 
   const isLiked = item.likes.some((id) => id === currentUser?._id);
   const isOwn = item.owner === currentUser?._id;
-  console.log('ItemCard debug:', {
-    isLoggedIn,
-    currentUser: currentUser?._id,
-    itemOwner: item.owner,
-    isLiked,
-  });
 
   const handleLike = (e) => {
     e.stopPropagation();

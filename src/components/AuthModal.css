@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.35); /* dim page behind the modal */
+  background: rgba(0, 0, 0, 0.35);
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -24,7 +24,7 @@
    ───────────────────────────── */
 .modal__container {
   background: #fff;
-  width: 430px; /* tweak to taste */
+  width: 430px;
   border-radius: 16px;
   padding: 24px 32px 32px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
@@ -83,7 +83,7 @@
 }
 
 .modal__form input::placeholder {
-  color: #909090; /* light grey placeholder */
+  color: #909090;
 }
 
 /* ─────────────────────────────
@@ -92,7 +92,7 @@
 .auth-form__footer-container {
   display: flex;
   align-items: center;
-  gap: 12px; /* space between primary button & link */
+  gap: 12px;
   margin-top: 4px;
 }
 
@@ -100,7 +100,7 @@
    7. PRIMARY SUBMIT BUTTON
    ───────────────────────────── */
 .auth-form__submit {
-  background: #c5c5c5; /* grey when disabled */
+  background: #c5c5c5;
   color: #fff;
   font-size: 14px;
   border: 0;
@@ -111,7 +111,7 @@
 }
 
 .auth-form__submit--active:not(:disabled) {
-  background: #006ef3; /* ← your brand colour when active */
+  background: #006ef3;
   cursor: pointer;
 }
 
@@ -128,7 +128,6 @@
   cursor: pointer;
 }
 
-/* Add to your AuthModal.css or RegisterModal.css */
 .auth-modal__buttons-container {
   display: flex;
   align-items: center;

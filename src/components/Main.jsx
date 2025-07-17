@@ -27,13 +27,6 @@ function Main({
           {clothingItems
 
             .filter((item) => {
-              console.log('Weather data:', weatherData);
-              console.log('Item weather:', item.weather);
-              console.log('Weather type:', weatherData.type);
-              console.log(
-                'Does item match?',
-                item.weather === weatherData.type
-              );
               return item.weather === weatherData.type;
             })
 

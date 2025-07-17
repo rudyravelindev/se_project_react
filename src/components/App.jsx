@@ -221,8 +221,6 @@ function App() {
     if (isLiked) {
       removeLike(id, token)
         .then((updatedItem) => {
-          console.log('API response for like:', updatedItem);
-
           setClothingItems((prevItems) =>
             prevItems.map((item) => (item._id === id ? updatedItem.data : item))
           );
