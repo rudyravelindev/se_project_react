@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useForm } from '../hooks/useForm';
 import './EditProfileModal.css';
 import CurrentUserContext from '../contexts/CurrentUserContext';
@@ -7,12 +7,21 @@ import ModalWithForm from './ModalWithForm';
 function EditProfileModal({ isOpen, onClose, onUpdateProfile, isLoading }) {
   const { currentUser } = useContext(CurrentUserContext);
 
-  if (!currentUser) return null;
-
-  const { values, handleChange } = useForm({
-    name: currentUser.name,
-    avatar: currentUser.avatar,
+  const { values, handleChange, setValues } = useForm({
+    name: currentUser?.name || '',
+    avatar: currentUser?.avatar || '',
   });
+
+  useEffect(() => {
+    if (currentUser) {
+      setValues({
+        name: currentUser.name,
+        avatar: currentUser.avatar,
+      });
+    }
+  }, [currentUser, setValues]);
+
+  if (!currentUser) return null;
 
   const isFormValid = values.name.trim() !== '' && values.avatar.trim() !== '';
 
