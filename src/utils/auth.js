@@ -1,7 +1,8 @@
-const baseUrl =
+const BASE_URL =
   process.env.NODE_ENV === 'production'
     ? 'put the URL for your deployed backend here, including https://api.rudyravelinwtwr.crabdance.com'
     : 'http://localhost:3001';
+console.log('BASE_URL:', BASE_URL);
 
 const handleApiResponse = async (response) => {
   if (!response.ok) {

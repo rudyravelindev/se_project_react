@@ -1,9 +1,9 @@
-const baseUrl =
+const BASE_URL =
   process.env.NODE_ENV === 'production'
     ? 'put the URL for your deployed backend here, including https://api.rudyravelinwtwr.crabdance.com'
     : 'http://localhost:3001';
 
-import { BASE_URL } from './constants';
+// import { BASE_URL } from './constants';
 
 export const checkResponse = (res) => {
   if (!res.ok) {

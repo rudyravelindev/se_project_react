@@ -14,9 +14,12 @@ export default function Profile({
 }) {
   const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
 
-  const userItems = clothingItems.filter(
-    (item) => item.owner === currentUser?._id
+  const userItems = (clothingItems || []).filter(
+    (item) => item?.owner === currentUser?._id
   );
+  // const userItems = clothingItems.filter(
+  //   (item) => item.owner === currentUser?._id
+  // );
 
   return (
     <div className="profile">
