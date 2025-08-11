@@ -222,7 +222,7 @@ function App() {
       removeLike(id, token)
         .then((updatedItem) => {
           setClothingItems((prevItems) =>
-            prevItems.map((item) => (item._id === id ? updatedItem.data : item))
+            prevItems.map((item) => (item._id === id ? updatedItem : item))
           );
         })
         .catch(console.error);
