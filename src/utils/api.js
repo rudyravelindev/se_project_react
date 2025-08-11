@@ -25,7 +25,7 @@ export const addItem = (item, token) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`, // Consistent header casing
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(item),
   });
@@ -78,7 +78,7 @@ export const addLike = (itemId, token) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`, // Fixed casing
+      Authorization: `Bearer ${token}`,
     },
   });
 };
@@ -88,7 +88,7 @@ export const removeLike = (itemId, token) => {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`, // Fixed casing
+      Authorization: `Bearer ${token}`,
     },
   });
 };
