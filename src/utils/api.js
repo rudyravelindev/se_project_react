@@ -1,6 +1,6 @@
 const BASE_URL =
   process.env.NODE_ENV === 'production'
-    ? 'put the URL for your deployed backend here, including https://api.rudyravelinwtwr.crabdance.com'
+    ? 'https://api.wtwr.fpr.net'
     : 'http://localhost:3001';
 
 // import { BASE_URL } from './constants';
@@ -16,20 +16,50 @@ function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
 
-export function getItems() {
-  return request(`${BASE_URL}/items`);
+export function getItems(token) {
+  return request(`${BASE_URL}/items`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 }
 
+// In your frontend API utility file
 export const addItem = (item, token) => {
-  return request(`${BASE_URL}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(item),
-  });
+  })
+    .then((res) => {
+      if (!res.ok) {
+        return res.json().then((err) => {
+          console.error('API Error:', err);
+          throw new Error(err.message || 'Failed to create item');
+        });
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log('API Response Data:', data);
+      // Extract the first item from the array
+      return Array.isArray(data) ? data[0] : data;
+    });
 };
+
+// export const addItem = (item, token) => {
+//   return request(`${BASE_URL}/items`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${token}`,
+//     },
+//     body: JSON.stringify(item),
+//   });
+// };
 
 export const deleteItem = (id, token) => {
   // Added token parameter

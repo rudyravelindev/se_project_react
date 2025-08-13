@@ -65,13 +65,17 @@ function App() {
       .catch(console.error);
   }, []);
 
-  // Fetch clothing items
+  // Fetch clothing items with error handling
   useEffect(() => {
     getItems()
-      .then((data) => {
-        setClothingItems(data.data);
+      .then((response) => {
+        const items = Array.isArray(response?.data) ? response.data : [];
+        setClothingItems(items);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error('Failed to fetch items:', err);
+        setClothingItems([]); // Ensure state remains an array
+      });
   }, []);
 
   // Handle escape key press for all modals
@@ -132,24 +136,59 @@ function App() {
     deleteItem(card._id, token)
       .then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== card._id)
+          (prevItems || []).filter((item) => item._id !== card._id)
         );
         closeActiveModal();
       })
       .catch(console.error)
       .finally(() => setIsLoading(false));
   };
-
-  const handleAddItemSubmit = (newItem) => {
+  // testing
+  const handleAddItemSubmit = async (newItem) => {
     setIsLoading(true);
     const token = localStorage.getItem('jwt');
-    addItem(newItem, token)
-      .then((createdItem) => {
-        setClothingItems((prevItems) => [createdItem, ...prevItems]);
-        closeActiveModal();
-      })
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
+
+    try {
+      // 1. Optimistic UI update
+      const tempId = `temp-${Date.now()}`;
+      setClothingItems((prev) => [
+        { ...newItem, _id: tempId },
+        ...(prev || []),
+      ]);
+
+      // 2. Make API call
+      const createdItem = await addItem(newItem, token);
+      console.log('Created item response:', createdItem);
+
+      // 3. Replace temp item with real one
+      setClothingItems((prev) => [
+        createdItem,
+        ...prev.filter((item) => item._id !== tempId),
+      ]);
+
+      // 4. Verify with server after small delay
+      setTimeout(async () => {
+        try {
+          const { data } = await getItems();
+          console.log('Verification fetch:', data);
+          if (!data.some((item) => item._id === createdItem._id)) {
+            console.warn('Item not found in verification fetch');
+          }
+        } catch (err) {
+          console.error('Verification failed:', err);
+        }
+      }, 1000);
+
+      closeActiveModal();
+    } catch (err) {
+      console.error('Full error:', err);
+      // Revert to server state
+      const { data } = await getItems();
+      setClothingItems(data || []);
+      alert(`Failed to add item: ${err.message}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleRegister = async ({ name, avatar, email, password }) => {
@@ -218,23 +257,23 @@ function App() {
 
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem('jwt');
-    if (isLiked) {
-      removeLike(id, token)
-        .then((updatedItem) => {
-          setClothingItems((prevItems) =>
-            prevItems.map((item) => (item._id === id ? updatedItem : item))
-          );
-        })
-        .catch(console.error);
-    } else {
-      addLike(id, token)
-        .then((updatedItem) => {
-          setClothingItems((prevItems) =>
-            prevItems.map((item) => (item._id === id ? updatedItem.data : item))
-          );
-        })
-        .catch(console.error);
-    }
+    const apiCall = isLiked ? removeLike : addLike;
+
+    apiCall(id, token)
+      .then((response) => {
+        const updatedItem = response?.data || response;
+        if (!updatedItem) {
+          throw new Error('No item data received');
+        }
+        setClothingItems((prevItems) =>
+          (prevItems || []).map((item) =>
+            item._id === id ? updatedItem : item
+          )
+        );
+      })
+      .catch((err) => {
+        console.error(`Failed to ${isLiked ? 'remove' : 'add'} like:`, err);
+      });
   };
 
   return (

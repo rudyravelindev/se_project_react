@@ -34,6 +34,6 @@
     "json-server": "^1.0.0-beta.3",
     "vite": "^5.4.10"
   },
-  "homepage": "https://rudyravelinwtwr.crabdance.com",
-  "deploy": "npm run build && scp -r ./dist/* tripletenuser@domainname.example.com:/home/tripletenuser/frontend"
+  "homepage": "https://wtwr.fpr.net",
+  "deploy": "npm run build && scp -r ./dist/* rudyravelin@wtwr.fpr.net:/home/rudyravelin/frontend"
 }

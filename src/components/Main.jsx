@@ -24,6 +24,20 @@ function Main({
           wear:
         </p>
         <ul className="cards__list">
+          {(clothingItems || [])
+            .filter((item) => weatherData && item.weather === weatherData.type)
+            .map((item) => (
+              <ItemCard
+                key={item._id}
+                item={item}
+                onCardClick={() => handleCardClick(item)}
+                onCardLike={onCardLike}
+                isLoggedIn={isLoggedIn}
+              />
+            ))}
+        </ul>
+
+        {/* <ul className="cards__list">
           {clothingItems
 
             .filter((item) => {
@@ -41,7 +55,7 @@ function Main({
                 />
               );
             })}
-        </ul>
+        </ul> */}
       </section>
     </main>
   );
