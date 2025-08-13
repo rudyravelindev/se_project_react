@@ -277,91 +277,89 @@ function App() {
   };
 
   return (
-    <BrowserRouter basename="/wtwr/se_project_react">
-      <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
-        <CurrentTemperatureUnitContext.Provider
-          value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-        >
-          <div className="page">
-            <div className="page__content">
-              <Header
-                handleAddClick={handleAddClick}
-                weatherData={weatherData}
-                isLoggedIn={isLoggedIn}
-                onLoginClick={() => setIsLoginModalOpen(true)}
-                onRegisterClick={() => setIsRegisterModalOpen(true)}
-                onLogoutClick={handleLogout}
+    <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
+      <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      >
+        <div className="page">
+          <div className="page__content">
+            <Header
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
+              isLoggedIn={isLoggedIn}
+              onLoginClick={() => setIsLoginModalOpen(true)}
+              onRegisterClick={() => setIsRegisterModalOpen(true)}
+              onLogoutClick={handleLogout}
+            />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    weatherData={weatherData}
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    isLoggedIn={isLoggedIn}
+                    onCardLike={handleCardLike}
+                  />
+                }
               />
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <Main
-                      weatherData={weatherData}
-                      handleCardClick={handleCardClick}
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      onEditProfile={handleEditProfileClick}
                       clothingItems={clothingItems}
-                      isLoggedIn={isLoggedIn}
+                      onCardClick={handleCardClick}
+                      handleAddClick={handleAddClick}
+                      onLogout={handleLogout}
                       onCardLike={handleCardLike}
                     />
-                  }
-                />
-                <Route
-                  path="/profile"
-                  element={
-                    <ProtectedRoute isLoggedIn={isLoggedIn}>
-                      <Profile
-                        onEditProfile={handleEditProfileClick}
-                        clothingItems={clothingItems}
-                        onCardClick={handleCardClick}
-                        handleAddClick={handleAddClick}
-                        onLogout={handleLogout}
-                        onCardLike={handleCardLike}
-                      />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-              <Footer />
-              {/* All modals */}
-              <AddItemModal
-                isOpen={activeModal === 'add-garment'}
-                onClose={closeActiveModal}
-                onAddItem={handleAddItemSubmit}
-                buttonText={isLoading ? 'Saving...' : 'Add garment'}
+                  </ProtectedRoute>
+                }
               />
-              <ItemModal
-                activeModal={activeModal}
-                card={selectedCard}
-                onClose={closeActiveModal}
-                isOpen={activeModal === 'preview'}
-                onDelete={handleDeleteItem}
-                isLoggedIn={isLoggedIn}
-              />
-              <RegisterModal
-                isOpen={isRegisterModalOpen}
-                onClose={() => setIsRegisterModalOpen(false)}
-                onRegister={handleRegister}
-                onLoginClick={switchToLoginModal}
-                buttonText={isLoading ? 'Saving...' : 'Sign up'}
-              />
-              <LoginModal
-                isOpen={isLoginModalOpen}
-                onClose={() => setIsLoginModalOpen(false)}
-                onLogin={handleLogin}
-                onRegisterClick={switchToRegisterModal}
-                buttonText={isLoading ? 'Signing in...' : 'Sign in'}
-              />
-              <EditProfileModal
-                isOpen={isEditProfileModalOpen}
-                onClose={() => setIsEditProfileModalOpen(false)}
-                onUpdateProfile={handleProfileUpdate}
-                buttonText={isLoading ? 'Saving...' : 'Save changes'}
-              />
-            </div>
+            </Routes>
+            <Footer />
+            {/* All modals */}
+            <AddItemModal
+              isOpen={activeModal === 'add-garment'}
+              onClose={closeActiveModal}
+              onAddItem={handleAddItemSubmit}
+              buttonText={isLoading ? 'Saving...' : 'Add garment'}
+            />
+            <ItemModal
+              activeModal={activeModal}
+              card={selectedCard}
+              onClose={closeActiveModal}
+              isOpen={activeModal === 'preview'}
+              onDelete={handleDeleteItem}
+              isLoggedIn={isLoggedIn}
+            />
+            <RegisterModal
+              isOpen={isRegisterModalOpen}
+              onClose={() => setIsRegisterModalOpen(false)}
+              onRegister={handleRegister}
+              onLoginClick={switchToLoginModal}
+              buttonText={isLoading ? 'Saving...' : 'Sign up'}
+            />
+            <LoginModal
+              isOpen={isLoginModalOpen}
+              onClose={() => setIsLoginModalOpen(false)}
+              onLogin={handleLogin}
+              onRegisterClick={switchToRegisterModal}
+              buttonText={isLoading ? 'Signing in...' : 'Sign in'}
+            />
+            <EditProfileModal
+              isOpen={isEditProfileModalOpen}
+              onClose={() => setIsEditProfileModalOpen(false)}
+              onUpdateProfile={handleProfileUpdate}
+              buttonText={isLoading ? 'Saving...' : 'Save changes'}
+            />
           </div>
-        </CurrentTemperatureUnitContext.Provider>
-      </CurrentUserContext.Provider>
-    </BrowserRouter>
+        </div>
+      </CurrentTemperatureUnitContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 
