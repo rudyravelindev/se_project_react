@@ -50,17 +50,6 @@ export const addItem = (item, token) => {
     });
 };
 
-// export const addItem = (item, token) => {
-//   return request(`${BASE_URL}/items`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${token}`,
-//     },
-//     body: JSON.stringify(item),
-//   });
-// };
-
 export const deleteItem = (id, token) => {
   // Added token parameter
   return request(`${BASE_URL}/items/${id}`, {
