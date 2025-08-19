@@ -1,6 +1,6 @@
 const BASE_URL =
   process.env.NODE_ENV === 'production'
-    ? 'api.wtwr.fpr.net'
+    ? 'https://api.wtwr.fpr.net'
     : 'http://localhost:3001';
 console.log('BASE_URL:', BASE_URL);
 
