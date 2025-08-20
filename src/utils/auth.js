@@ -1,5 +1,7 @@
 const BASE_URL =
-  process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001';
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.wtwr.fpr.net'
+    : 'http://localhost:3001';
 
 const handleApiResponse = async (response) => {
   if (!response.ok) {

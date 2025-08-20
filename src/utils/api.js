@@ -1,5 +1,7 @@
 const BASE_URL =
-  process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001';
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.wtwr.fpr.net'
+    : 'http://localhost:3001';
 
 const handleApiResponse = async (response) => {
   if (!response.ok) {
@@ -54,3 +56,5 @@ export const removeLike = (itemId, token) =>
     method: 'DELETE',
     headers: { Authorization: `Bearer ${token}` },
   }).then(handleApiResponse);
+
+export const checkResponse = handleApiResponse;
