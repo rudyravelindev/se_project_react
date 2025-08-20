@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 import './ItemCard.css';
 
+import { getItems, addItem, deleteItem, addLike, removeLike } from './api';
+
 function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
   const { currentUser } = useContext(CurrentUserContext);
 

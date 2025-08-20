@@ -3,6 +3,8 @@ import './ClothesSection.css';
 import ItemCard from './ItemCard';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
+import { getItems, addItem, deleteItem, addLike, removeLike } from './api';
+
 function ClothesSection({ clothingItems, onAddItem, onCardClick, onCardLike }) {
   const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
 

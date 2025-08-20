@@ -3,6 +3,7 @@ import ModalWithForm from './ModalWithForm';
 import Input from './Input';
 import './AuthModal.css';
 import './RegisterModal.css';
+import { register, login, checkToken } from './auth';
 
 const RegisterModal = ({
   isOpen,

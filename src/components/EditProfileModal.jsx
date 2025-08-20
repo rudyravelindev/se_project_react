@@ -4,6 +4,8 @@ import './EditProfileModal.css';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import ModalWithForm from './ModalWithForm';
 
+import { getItems, addItem, deleteItem, addLike, removeLike } from './api';
+
 function EditProfileModal({ isOpen, onClose, onUpdateProfile, isLoading }) {
   const { currentUser } = useContext(CurrentUserContext);
 

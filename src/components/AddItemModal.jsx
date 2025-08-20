@@ -3,6 +3,8 @@ import { useForm } from '../hooks/useForm';
 import ModalWithForm from './ModalWithForm';
 import { useEffect } from 'react';
 
+import { getItems, addItem, deleteItem, addLike, removeLike } from './api';
+
 export default function AddItemModal({ onClose, isOpen, onAddItem }) {
   const { values, handleChange, setValues } = useForm({
     name: '',
