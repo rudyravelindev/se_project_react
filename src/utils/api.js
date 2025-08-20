@@ -1,5 +1,7 @@
-const BASE_URL = 'https://api.wtwr.fpr.net';
-// const BASE_URL = 'http://localhost:3001';
+const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.wtwr.fpr.net'
+    : 'http://localhost:3001';
 
 export const checkResponse = (res) => {
   if (!res.ok) {

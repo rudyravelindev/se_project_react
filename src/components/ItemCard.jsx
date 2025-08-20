@@ -5,8 +5,15 @@ import './ItemCard.css';
 function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
   const { currentUser } = useContext(CurrentUserContext);
 
-  const isLiked = item.likes.some((id) => id === currentUser?._id);
-  const isOwn = item.owner === currentUser?._id;
+  // const isLiked = item.likes.some((id) => id === currentUser?._id);
+  // const isLiked = item.likes.some((id) => id.toString() === currentUser?._id);
+  const isLiked = (item.likes || []).some(
+    (id) => id.toString() === currentUser._id
+  );
+
+  // const isOwn = item.owner === currentUser?._id;
+  // const isOwn = item.owner.toString() === currentUser?._id;
+  const isOwn = item.owner === currentUser._id;
 
   const handleLike = (e) => {
     e.stopPropagation();

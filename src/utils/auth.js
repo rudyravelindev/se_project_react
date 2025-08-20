@@ -2,7 +2,6 @@ const BASE_URL =
   process.env.NODE_ENV === 'production'
     ? 'https://api.wtwr.fpr.net'
     : 'http://localhost:3001';
-console.log('BASE_URL:', BASE_URL);
 
 const handleApiResponse = async (response) => {
   if (!response.ok) {

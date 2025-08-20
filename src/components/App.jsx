@@ -68,13 +68,21 @@ function App() {
   // Fetch clothing items with error handling
   useEffect(() => {
     getItems()
-      .then((response) => {
-        const items = Array.isArray(response?.data) ? response.data : [];
-        setClothingItems(items);
+      .then((items) => {
+        if (Array.isArray(items)) {
+          // Ensure likes is always an array
+          const safeItems = items.map((item) => ({
+            ...item,
+            likes: item.likes || [],
+          }));
+          setClothingItems(safeItems);
+        } else {
+          setClothingItems([]);
+        }
       })
       .catch((err) => {
         console.error('Failed to fetch items:', err);
-        setClothingItems([]); // Ensure state remains an array
+        setClothingItems([]);
       });
   }, []);
 
@@ -169,9 +177,9 @@ function App() {
       // 4. Verify with server after small delay
       setTimeout(async () => {
         try {
-          const { data } = await getItems();
-          console.log('Verification fetch:', data);
-          if (!data.some((item) => item._id === createdItem._id)) {
+          const itemsFromServer = await getItems(); // use the array directly
+          console.log('Verification fetch:', itemsFromServer);
+          if (!itemsFromServer.some((item) => item._id === createdItem._id)) {
             console.warn('Item not found in verification fetch');
           }
         } catch (err) {
