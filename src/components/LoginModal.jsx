@@ -4,7 +4,7 @@ import Input from './Input';
 import { useForm } from '../hooks/useForm';
 import './LoginModal.css';
 import './AuthModal.css';
-import { register, login, checkToken } from './auth';
+import { register, login, checkToken } from '../utils/auth';
 
 const LoginModal = ({
   isOpen,
