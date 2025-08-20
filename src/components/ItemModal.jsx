@@ -6,7 +6,6 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 function ItemModal({ activeModal, onClose, card, isOpen, onDelete }) {
   const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
 
-  // Check if current user is the owner of the item
   const isOwner = isLoggedIn && currentUser?._id === card.owner;
 
   return (

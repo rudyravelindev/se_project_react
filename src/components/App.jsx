@@ -43,7 +43,6 @@ function App() {
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Check token on app load
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
@@ -56,7 +55,6 @@ function App() {
     }
   }, []);
 
-  // Fetch weather data
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -65,12 +63,10 @@ function App() {
       .catch(console.error);
   }, []);
 
-  // Fetch clothing items with error handling
   useEffect(() => {
     getItems()
       .then((items) => {
         if (Array.isArray(items)) {
-          // Ensure likes is always an array
           const safeItems = items.map((item) => ({
             ...item,
             likes: item.likes || [],
@@ -86,7 +82,6 @@ function App() {
       });
   }, []);
 
-  // Handle escape key press for all modals
   useEffect(() => {
     if (
       !activeModal &&
@@ -151,30 +146,26 @@ function App() {
       .catch(console.error)
       .finally(() => setIsLoading(false));
   };
-  // testing
+
   const handleAddItemSubmit = async (newItem) => {
     setIsLoading(true);
     const token = localStorage.getItem('jwt');
 
     try {
-      // 1. Optimistic UI update
       const tempId = `temp-${Date.now()}`;
       setClothingItems((prev) => [
         { ...newItem, _id: tempId },
         ...(prev || []),
       ]);
 
-      // 2. Make API call
       const createdItem = await addItem(newItem, token);
       console.log('Created item response:', createdItem);
 
-      // 3. Replace temp item with real one
       setClothingItems((prev) => [
         createdItem,
         ...prev.filter((item) => item._id !== tempId),
       ]);
 
-      // 4. Verify with server after small delay
       setTimeout(async () => {
         try {
           const itemsFromServer = await getItems(); // use the array directly
@@ -190,7 +181,7 @@ function App() {
       closeActiveModal();
     } catch (err) {
       console.error('Full error:', err);
-      // Revert to server state
+
       const { data } = await getItems();
       setClothingItems(data || []);
       alert(`Failed to add item: ${err.message}`);
@@ -329,7 +320,7 @@ function App() {
               />
             </Routes>
             <Footer />
-            {/* All modals */}
+
             <AddItemModal
               isOpen={activeModal === 'add-garment'}
               onClose={closeActiveModal}
