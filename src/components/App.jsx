@@ -159,7 +159,6 @@ function App() {
       ]);
 
       const createdItem = await addItem(newItem, token);
-      console.log('Created item response:', createdItem);
 
       setClothingItems((prev) => [
         createdItem,
@@ -169,13 +168,10 @@ function App() {
       setTimeout(async () => {
         try {
           const itemsFromServer = await getItems(); // use the array directly
-          console.log('Verification fetch:', itemsFromServer);
+
           if (!itemsFromServer.some((item) => item._id === createdItem._id)) {
-            console.warn('Item not found in verification fetch');
           }
-        } catch (err) {
-          console.error('Verification failed:', err);
-        }
+        } catch (err) {}
       }, 1000);
 
       closeActiveModal();
